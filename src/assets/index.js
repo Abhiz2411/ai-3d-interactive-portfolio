@@ -37,6 +37,7 @@ import krypton6 from "./project/krypton6.png";
 
 
 import portfolio from "./nav-link-previews/home.png";
+import portfolioProject from "./project/portfolio.png";
 import about from "./nav-link-previews/about.png";
 import achievements from "./nav-link-previews/achievements.png";
 import testimonials from "./nav-link-previews/testimonials.png";
@@ -58,6 +59,7 @@ export {
   astroPixel2,
   astroPixel3,
   portfolio,
+  portfolioProject,
   about,
   achievements,
   testimonials,

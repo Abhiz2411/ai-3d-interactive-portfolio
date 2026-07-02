@@ -23,6 +23,7 @@ import {
   malariadetectionsystem,
   novalearn,
   portfolio,
+  portfolioProject,
   astroPixel1,
   astroPixel2,
   astroPixel3,
@@ -329,8 +330,8 @@ const projects = [
         color: "violet-text-gradient",
       },
     ],
-    image: portfolio,
-    images: [portfolio, about, skills, contact], // Multiple screenshot support
+    image: portfolioProject,
+    images: [portfolioProject, about, skills, contact], // Multiple screenshot support
     source_code_link: "https://github.com/Abhiz2411",
     metrics: {
       stars: 234,
