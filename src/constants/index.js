@@ -97,7 +97,7 @@ const testimonials = [
       "I thought it was impossible to make a website as beautiful as our product, but Abhijit proved me wrong.",
     name: "John Doe 1",
     designation: "CFO",
-    company: "Acme Co",
+    company: "Nimbus Labs",
     image: "https://randomuser.me/api/portraits/women/4.jpg",
   },
   {
@@ -105,7 +105,7 @@ const testimonials = [
       "I've never met a web developer who truly cares about their clients' success like Abhijit does.",
     name: "John Doe 2",
     designation: "COO",
-    company: "DEF Corp",
+    company: "Bright Orbit Inc",
     image: "https://randomuser.me/api/portraits/men/5.jpg",
   },
   {
@@ -113,7 +113,7 @@ const testimonials = [
       "Abhijit boosted our website traffic by 50% through his smart optimization. We are Truly grateful!",
     name: "John Doe 3",
     designation: "CTO",
-    company: "456 Enterprises",
+    company: "Vertex Studio",
     image: "https://randomuser.me/api/portraits/women/6.jpg",
   },
 ];
