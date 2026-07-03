@@ -11,6 +11,23 @@ const FRAME_PATH = (i) =>
     "0"
   )}_delay-0.041s.webp`;
 
+// On mobile the frames (16:9 landscape) are far wider than the viewport is
+// tall, so a pure "cover" fit crops most of the width away and reads as
+// zoomed-in. Capping the scale below full cover trades some vertical
+// letterboxing for a much less cropped, less "zoomed" frame.
+const MOBILE_ZOOM_CAP = 1.4;
+
+// White stroke keeps the purple accent readable against bright/backlit
+// parts of the photo where plain #915EFF text disappears.
+const accentTextStyle = {
+  WebkitTextStroke: "1px rgba(255,255,255,0.9)",
+  paintOrder: "stroke fill",
+  textShadow: "0 1px 8px rgba(0,0,0,0.55)",
+};
+
+const overlayTextClass =
+  "text-white max-w-xl font-medium text-xl xs:text-2xl sm:text-2xl md:text-3xl lg:text-4xl leading-snug lg:leading-[46px]";
+
 const ScrollyHero = () => {
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
@@ -76,10 +93,17 @@ const ScrollyHero = () => {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, cssWidth, cssHeight);
 
-    const scale = Math.max(
+    const coverScale = Math.max(
       cssWidth / image.naturalWidth,
       cssHeight / image.naturalHeight
     );
+    const containScale = Math.min(
+      cssWidth / image.naturalWidth,
+      cssHeight / image.naturalHeight
+    );
+    const scale = isMobile
+      ? Math.min(coverScale, containScale * MOBILE_ZOOM_CAP)
+      : coverScale;
     const drawWidth = image.naturalWidth * scale;
     const drawHeight = image.naturalHeight * scale;
     const offsetX = (cssWidth - drawWidth) / 2;
@@ -128,7 +152,7 @@ const ScrollyHero = () => {
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isMobile]);
 
   return (
     <section ref={sectionRef} className="relative w-full h-[400vh]" id="hero">
@@ -136,6 +160,7 @@ const ScrollyHero = () => {
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full"
+          style={{ backgroundColor: "#050816" }}
         />
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/60 pointer-events-none" />
@@ -145,9 +170,12 @@ const ScrollyHero = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6"
         >
           <h1 className={`${styles.heroHeadText} text-white`}>
-            Hi, I'm <span className="text-[#915EFF]">Abhijit Zende</span>
+            Hi, I'm{" "}
+            <span className="text-[#915EFF]" style={accentTextStyle}>
+              Abhijit Zende
+            </span>
           </h1>
-          <p className={`${styles.heroSubText} mt-2 text-white-100`}>
+          <p className={`${overlayTextClass} mt-2 mx-auto`}>
             Lead AI Engineer
           </p>
         </motion.div>
@@ -156,9 +184,16 @@ const ScrollyHero = () => {
           style={{ opacity: line2Opacity, x: line2X }}
           className="absolute inset-0 z-10 flex items-center justify-start px-8 md:px-20"
         >
-          <p className={`${styles.heroSubText} text-white max-w-xl`}>
-            I build <span className="text-[#915EFF]">GenAI</span> &{" "}
-            <span className="text-[#915EFF]">Agentic AI</span> systems.
+          <p className={overlayTextClass}>
+            I build{" "}
+            <span className="text-[#915EFF]" style={accentTextStyle}>
+              GenAI
+            </span>{" "}
+            &{" "}
+            <span className="text-[#915EFF]" style={accentTextStyle}>
+              Agentic AI
+            </span>{" "}
+            systems.
           </p>
         </motion.div>
 
@@ -166,9 +201,16 @@ const ScrollyHero = () => {
           style={{ opacity: line3Opacity, x: line3X }}
           className="absolute inset-0 z-10 flex items-center justify-end px-8 md:px-20 text-right"
         >
-          <p className={`${styles.heroSubText} text-white max-w-xl`}>
-            Bridging <span className="text-[#915EFF]">AI</span> and{" "}
-            <span className="text-[#915EFF]">engineering</span>.
+          <p className={overlayTextClass}>
+            Bridging{" "}
+            <span className="text-[#915EFF]" style={accentTextStyle}>
+              AI
+            </span>{" "}
+            and{" "}
+            <span className="text-[#915EFF]" style={accentTextStyle}>
+              engineering
+            </span>
+            .
           </p>
         </motion.div>
 
