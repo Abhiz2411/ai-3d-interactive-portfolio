@@ -17,12 +17,11 @@ const FRAME_PATH = (i) =>
 // letterboxing for a much less cropped, less "zoomed" frame.
 const MOBILE_ZOOM_CAP = 1.4;
 
-// White stroke keeps the purple accent readable against bright/backlit
-// parts of the photo where plain #915EFF text disappears.
+// A soft dark halo (no stroke/outline) keeps the purple accent readable
+// against bright/backlit parts of the photo without looking like a sticker.
 const accentTextStyle = {
-  WebkitTextStroke: "1px rgba(255,255,255,0.9)",
-  paintOrder: "stroke fill",
-  textShadow: "0 1px 8px rgba(0,0,0,0.55)",
+  textShadow:
+    "0 0 6px rgba(0,0,0,0.95), 0 0 16px rgba(0,0,0,0.9), 0 0 32px rgba(0,0,0,0.75), 0 2px 8px rgba(0,0,0,0.95)",
 };
 
 const overlayTextClass =
