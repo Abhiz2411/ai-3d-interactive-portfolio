@@ -5,9 +5,9 @@ import {
   Achievement,
   Contact,
   Feedbacks,
-  Hero,
   Navbar,
   Preloader,
+  ScrollyHero,
   StarsCanvas,
   Works,
 } from "./components";
@@ -31,7 +31,7 @@ const App = () => {
               <EasterEggs />
               <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
                 <Navbar />
-                <Hero />
+                <ScrollyHero />
               </div>
               <StarsCanvas />
               <About />
