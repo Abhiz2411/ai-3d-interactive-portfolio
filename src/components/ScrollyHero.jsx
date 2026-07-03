@@ -20,8 +20,7 @@ const MOBILE_ZOOM_CAP = 1.4;
 // A soft dark halo (no stroke/outline) keeps the purple accent readable
 // against bright/backlit parts of the photo without looking like a sticker.
 const accentTextStyle = {
-  textShadow:
-    "0 0 6px rgba(0,0,0,0.95), 0 0 16px rgba(0,0,0,0.9), 0 0 32px rgba(0,0,0,0.75), 0 2px 8px rgba(0,0,0,0.95)",
+  textShadow: "0 0 6px rgba(0,0,0,0.95), 0 1px 12px rgba(0,0,0,0.85)",
 };
 
 const overlayTextClass =
@@ -131,6 +130,8 @@ const ScrollyHero = () => {
   }, [frameIndices]);
 
   useEffect(() => {
+    let rafId = null;
+
     const unsubscribe = scrollYProgress.on("change", (progress) => {
       const lastIndex = frameIndices.length - 1;
       const targetIndex = Math.min(
@@ -138,10 +139,22 @@ const ScrollyHero = () => {
         Math.max(0, Math.round(progress * lastIndex))
       );
       currentFrameRef.current = targetIndex;
-      const image = imagesRef.current[targetIndex];
-      if (image) draw(image);
+
+      // Scroll can fire far more often than the display can paint; coalesce
+      // bursts into a single draw per animation frame instead of one draw
+      // per scroll event.
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const image = imagesRef.current[currentFrameRef.current];
+        if (image) draw(image);
+      });
     });
-    return unsubscribe;
+
+    return () => {
+      unsubscribe();
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, [scrollYProgress, frameIndices]);
 
   useEffect(() => {
