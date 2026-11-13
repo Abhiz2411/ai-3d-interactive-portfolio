@@ -118,6 +118,14 @@ const testimonials = [
   },
   {
     testimonial:
+      "I had the opportunity to know Abhijit during our college days, and it has been great to see his growth over the years. He has always been someone who is genuinely passionate about technology and continuously invests time in learning and improving his skills. His journey into AI, Generative AI, DevOps, and backend technologies reflects his dedication and strong work ethic. What stands out most is his willingness to explore new ideas, solve challenging problems, and share his knowledge with the community. Abhijit is a curious learner, a dependable professional, and someone who approaches every challenge with a positive mindset. I'm confident he will continue to make meaningful contributions in the AI and technology space. I wish him continued success in his journey.",
+    name: "Adnan Attar",
+    image: "/assets/testimonials/adnanattar.jpg",
+    designation: "Founder & CEO",
+    company: "Andro Buddy Technologies Pvt. Ltd.",
+  },
+  {
+    testimonial:
       "Abhijit is one of the brightest minds I have ever come across. His communication skills and quick grasp over new technologies is something which makes him unique from the crowd. He is a person who can relied upon for the end-to-end development and execution of projects due to his ownership attitude and high learning energy.",
     name: "Jayraj Choudhury",
     image: "/assets/testimonials/jayraj-choudhury-0b003916b.jpg",
