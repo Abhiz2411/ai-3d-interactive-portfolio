@@ -198,7 +198,7 @@ const ScrollyHero = () => {
 
         <motion.div
           style={{ opacity: line1Opacity, y: line1Y }}
-          className="absolute inset-0 z-10 flex flex-col items-center justify-start pt-[21vh] md:pt-0 md:justify-center text-center px-6"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-start pt-[21vh] md:pt-[16vh] md:justify-center text-center px-6"
         >
           <h1 className={`${styles.heroHeadText} text-white max-md:!text-[34px] max-md:!leading-[42px]`}>
             Hi, I'm{" "}
