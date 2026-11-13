@@ -17,15 +17,15 @@ import iconCampus from "./achievement/campus.svg";
 
 import mlBenchmark from "./project/ml-benchmark.webp";
 import portfolioSite from "./project/portfolio-site.webp";
-import energyForecasting from "./project/energy-forecasting.svg";
+import energyForecasting from "./project/energy-forecasting.webp";
 import dementiaCare from "./project/dementia.webp";
-import askMyPdf from "./project/ask-my-pdf.svg";
+import askMyPdf from "./project/ask-my-pdf.webp";
 import pathfinder from "./project/pathfinder.webp";
-import cinematch from "./project/cinematch.svg";
+import cinematch from "./project/cinematch.webp";
 import financeMe from "./project/financeme.webp";
 import smartParking from "./project/parking.webp";
 import smartParkingDiagram from "./project/parking-diagram.webp";
-import lsbStego from "./project/lsb-steganography.svg";
+import lsbStego from "./project/lsb-steganography.webp";
 
 import portfolio from "./nav-link-previews/home.webp";
 import about from "./nav-link-previews/about.webp";
