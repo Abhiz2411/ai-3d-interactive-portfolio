@@ -5,17 +5,10 @@ import { styles } from "../styles";
 import useMediaQuery from "../utils/useMediaQuery";
 
 const TOTAL_FRAMES = 240;
-const FRAME_PATH = (i) =>
-  `/assets/my-profile-hero-section/frame_${String(i).padStart(
-    3,
-    "0"
-  )}_delay-0.041s.webp`;
-
-// On mobile the frames (16:9 landscape) are far wider than the viewport is
-// tall, so a pure "cover" fit crops most of the width away and reads as
-// zoomed-in. Capping the scale below full cover trades some vertical
-// letterboxing for a much less cropped, less "zoomed" frame.
-const MOBILE_ZOOM_CAP = 1.4;
+const FRAME_PATH = (i, mobile) =>
+  mobile
+    ? `/assets/my-profile-hero-section-mobile/frame_${String(i).padStart(3, "0")}.webp`
+    : `/assets/my-profile-hero-section/frame_${String(i).padStart(3, "0")}_delay-0.041s.webp`;
 
 // A soft dark halo (no stroke/outline) keeps the purple accent readable
 // against bright/backlit parts of the photo without looking like a sticker.
@@ -93,13 +86,8 @@ const ScrollyHero = () => {
       cssWidth / image.naturalWidth,
       cssHeight / image.naturalHeight
     );
-    const containScale = Math.min(
-      cssWidth / image.naturalWidth,
-      cssHeight / image.naturalHeight
-    );
-    const scale = isMobile
-      ? Math.min(coverScale, containScale * MOBILE_ZOOM_CAP)
-      : coverScale;
+    // Mobile uses dedicated portrait (9:16) frames, so plain cover works.
+    const scale = coverScale;
     const drawWidth = image.naturalWidth * scale;
     const drawHeight = image.naturalHeight * scale;
     const offsetX = (cssWidth - drawWidth) / 2;
@@ -128,7 +116,7 @@ const ScrollyHero = () => {
       new Promise((resolve) => {
         const img = new Image();
         img.decoding = "async";
-        img.src = FRAME_PATH(frameIndices[i]);
+        img.src = FRAME_PATH(frameIndices[i], isMobile);
         img.onload = () => {
           if (!cancelled) {
             imagesRef.current[i] = img;

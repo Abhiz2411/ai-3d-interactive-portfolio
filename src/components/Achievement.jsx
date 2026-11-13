@@ -86,7 +86,12 @@ const AchievementCard = ({ Achievement }) => {
 const Achievement = () => {
   return (
     <>
-      <motion.div variants={textVariant()}>
+      <motion.div
+        variants={textVariant()}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <p className={`${styles.sectionSubText} text-center`}>
           What I have Achieved so far
         </p>

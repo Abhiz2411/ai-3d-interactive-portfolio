@@ -75,8 +75,8 @@ const App = () => {
                   </Suspense>
                   <About />
                   <Suspense fallback={<SectionFallback />}>
-                    <Works />
                     <Achievement />
+                    <Works />
                     <SkillKeyboard />
                     <div className="relative z-0">
                       <Contact />

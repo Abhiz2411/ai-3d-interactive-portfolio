@@ -69,3 +69,8 @@
 | After preloader uses transform (not `top`) | 60 | 3.9 s | 0.002 | 680 ms |
 
 - Open: TTI 14.6 s and TBT ~680 ms (main bundle ~1 MB / 295 KB gzip; Spline chunk 586 KB gzip loads late). Try splitting three/r3f/framer-motion out of the entry chunk.
+
+## 2026-11-14 update
+- Mobile hero done: 61 portrait frames (540x960) in `public/assets/my-profile-hero-section-mobile/`, used when width <= 768px. Source animated webp kept outside the repo.
+- Achievements moved above Projects; heading reveal fixed; certificates removed.
+- Analytics: plan to use Google Analytics 4 instead of Umami (see notes below).

@@ -41,7 +41,7 @@ export const navLinks = [
     title: "About",
   },
   {
-    id: "achievement",
+    id: "achievements",
     title: "Achievement",
   },
   {
@@ -53,6 +53,18 @@ export const navLinks = [
 
 const achievements = [
   {
+    title: ["Best Outgoing Student", "(CSE, 2023 batch)"],
+    company_name: "TKIET, Warananagar",
+    icon: iconGraduation,
+    iconBg: "#2a2150",
+    date: "Apr 2023",
+    points: [
+      "Nominated Best Outgoing Student from the Computer Science and Engineering branch at Tatyasaheb Kore Institute of Engineering & Technology (about 250 CSE and 750 students across branches).",
+      "Graduated with an 8.9 CGPA, cracked campus placements with two companies and placed 3rd in the college project presentation.",
+    ],
+    link: "https://www.linkedin.com/feed/update/urn:li:activity:7211815398814470144/",
+  },
+  {
     title: ["Kanaka Hackathon Winner"],
     company_name: "Kanaka Software",
     icon: iconHackathon,
@@ -62,26 +74,6 @@ const achievements = [
       "Team Medi-कवच won 1st prize (₹1 lakh) at the 3rd edition of the Kanaka Software hackathon.",
     ],
     link: "https://www.linkedin.com/feed/update/urn:li:activity:7130067327064154112/",
-  },
-  {
-    title: ["FreeCodeCamp"],
-    company_name: "freeCodeCamp",
-    icon: fcc,
-    iconBg: "#383E56",
-    date: "May 2024",
-    points: ["Responsive Web Design", "JavaScript"],
-  },
-  {
-    title: ["Best Outgoing Student", "(CSE, 2023 batch)"],
-    company_name: "TKIET, Warananagar",
-    icon: iconGraduation,
-    iconBg: "#2a2150",
-    date: "Jun 2024",
-    points: [
-      "Nominated Best Outgoing Student from the Computer Science and Engineering branch at Tatyasaheb Kore Institute of Engineering & Technology (about 250 CSE and 750 students across branches).",
-      "Graduated with an 8.9 CGPA, cracked campus placements with two companies and placed 3rd in the college project presentation.",
-    ],
-    link: "https://www.linkedin.com/feed/update/urn:li:activity:7211815398814470144/",
   },
   {
     title: ["National AI Competition", "Winning Team Mentor"],
@@ -107,35 +99,6 @@ const achievements = [
       "28 posts, 1,648 total reactions and 56 comments in 2024.",
     ],
     link: "https://lnkd.in/p/dWqgm7ja",
-  },
-  {
-    title: ["HackerRank"],
-    company_name: "HackerRank",
-    icon: hr,
-    iconBg: "#E6DEDD",
-    date: "Apr 2025",
-    points: [
-      "Python (Basic) Certificate",
-      "SQL (Basic) Certificate",
-      "CSS (Basic) Certificate",
-      "Go (Basic) Certificate",
-    ],
-  },
-  {
-    title: ["Certiport"],
-    company_name: "Certiport",
-    icon: cp,
-    iconBg: "#383E56",
-    date: "Apr 2025",
-    points: ["IT Specialist - HTML and CSS", "IT Specialist - Databases"],
-  },
-  {
-    title: ["Coursera"],
-    company_name: "Coursera",
-    icon: coursera,
-    iconBg: "#0056d2",
-    date: "Jul 2025",
-    points: ["IBM Full Stack Software Developer"],
   },
   {
     title: ["International Immersion Programme", "Nanyang Technological University"],
