@@ -106,7 +106,9 @@ const Contact = () => {
           play("error");
           setToast({
             open: true,
-            message: "Ahh, something went wrong. Please try again.",
+            message: error?.text
+              ? `Could not send: ${error.text} (${error.status})`
+              : "Ahh, something went wrong. Please try again.",
             type: "error",
           });
         }
