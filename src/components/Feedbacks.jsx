@@ -70,7 +70,7 @@ const Feedbacks = () => {
             <h2 className={styles.sectionHeadText}>Testimonials.</h2>
           </motion.div>
         </div>
-        <div className="testimonial-marquee -mt-20 pb-14 min-h-[480px]">
+        <div className="testimonial-marquee -mt-20 pt-6 pb-14 min-h-[520px]">
           <div
             className="testimonial-track"
             style={{

@@ -392,6 +392,9 @@
 .testimonial-card:focus-visible .testimonial-text {
   -webkit-line-clamp: unset;
   display: block;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 6px;
 }
 
 @media (prefers-reduced-motion: reduce) {
