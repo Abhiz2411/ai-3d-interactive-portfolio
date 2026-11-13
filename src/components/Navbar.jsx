@@ -14,37 +14,33 @@ import useNavPeek from "../reactbits/hooks/useNavPeek";
 
 const NAV_LINKS = [
   { title: "home", href: "#hero", img: portfolio },
-  {
-    title: "about",
-    href: "#about",
-    img: about,
-  },
-  {
-    title: "project",
-    href: "#projects",
-    img: project,
-  },
-  {
-    title: "achievements",
-    href: "#achievements",
-    img: achievements,
-  },
-  {
-    title: "skills",
-    href: "#skills",
-    img: skills,
-  },
-  {
-    title: "testimonials",
-    href: "#testimonials",
-    img: testimonials,
-  },
-  {
-    title: "contact",
-    href: "#contact",
-    img: contact,
-  },
+  { title: "testimonials", href: "#testimonials", img: testimonials },
+  { title: "about", href: "#about", img: about },
+  { title: "achievements", href: "#achievements", img: achievements },
+  { title: "projects", href: "#projects", img: project },
+  { title: "skills", href: "#skills", img: skills },
+  { title: "contact", href: "#contact", img: contact },
 ];
+
+// Below-fold sections mount after the page is idle, so a hash link clicked early
+// has no target yet. Scroll in JS (no full navigation) and wait for the target.
+function scrollToHash(href) {
+  const id = href.replace("#", "");
+  let tries = 0;
+  const go = () => {
+    if (id === "hero") {
+      window.scrollTo({ top: 0 });
+      return;
+    }
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ block: "start" });
+    } else if (tries++ < 40) {
+      setTimeout(go, 150);
+    }
+  };
+  go();
+}
 
 const opacity = {
   initial: { opacity: 0 },
@@ -229,20 +225,22 @@ const Navbar = () => {
               className="flex flex-row justify-between items-center w-full max-w-8xl mx-auto relative min-h-[60vh]"
               style={{ minHeight: 600 }}
             >
-              <div className="flex flex-wrap items-start gap-1 w-2/3 pl-8">
+              <div className="flex flex-wrap items-start gap-1 w-full md:w-2/3 pl-6 md:pl-8">
                 {NAV_LINKS.map((link, idx) => (
                   <a
                     key={link.title}
                     href={link.href}
-                    className="group cursor-pointer rounded-lg px-3 py-2 text-5xl md:text-7xl font-extrabold uppercase transition-all duration-200 whitespace-nowrap text-left relative"
+                    className="group cursor-pointer rounded-lg px-3 py-2 text-[30px] xs:text-4xl sm:text-5xl md:text-7xl font-extrabold uppercase transition-all duration-200 whitespace-nowrap text-left relative"
                     style={{ minHeight: "4.5rem" }}
                     onMouseOver={() => {
                       handleEnter(idx);
                     }}
                     onMouseLeave={handleLeave}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       setIsActive(false);
                       handleClick(idx);
+                      scrollToHash(link.href);
                     }}
                   >
                     <motion.p

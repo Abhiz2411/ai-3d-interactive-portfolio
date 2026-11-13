@@ -36,9 +36,9 @@ const STATES = {
       rotation: { x: 0, y: Math.PI / 12, z: 0 },
     },
     mobile: {
-      scale: { x: 0.24, y: 0.24, z: 0.24 },
+      scale: { x: 0.11, y: 0.11, z: 0.11 },
       position: { x: 0, y: 0, z: 0 }, // Centered
-      rotation: { x: 0, y: Math.PI / 6, z: 0 },
+      rotation: { x: 0, y: Math.PI / 10, z: 0 },
     },
   },
   // State for the projects section
