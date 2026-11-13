@@ -17,7 +17,7 @@ class SoundEffects {
     try {
       this.sounds[name] = new Audio(path);
       this.sounds[name].volume = this.volume;
-      this.sounds[name].preload = "auto";
+      this.sounds[name].preload = "none";
     } catch (error) {
       console.warn(`Failed to load sound: ${name}`, error);
     }

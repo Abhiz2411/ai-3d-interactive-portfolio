@@ -59,3 +59,13 @@
 - Done (2026-11-14): hero frames compressed + idle-loaded, project/nav images to WebP/SVG, unused 3D hero + desktop_pc removed.
 - Open: further trim the ~2 MB Spline runtime if Lighthouse still flags unused JS; consider AVIF; portrait hero frames for mobile.
 - Re-measure with Lighthouse (mobile + Slow 4G) after each big change.
+
+## Lighthouse (mobile, simulated Slow 4G, `vite preview`) - 2026-11-14
+
+| Run | Score | LCP | CLS | TBT |
+|---|---|---|---|---|
+| Before fixes | 14 | 5.3 s | 0.774 | 1,970 ms |
+| After self-hosted fonts, idle below-fold, lazy audio | 37 | 3.9 s | 0.723 | 620 ms |
+| After preloader uses transform (not `top`) | 60 | 3.9 s | 0.002 | 680 ms |
+
+- Open: TTI 14.6 s and TBT ~680 ms (main bundle ~1 MB / 295 KB gzip; Spline chunk 586 KB gzip loads late). Try splitting three/r3f/framer-motion out of the entry chunk.

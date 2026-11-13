@@ -1,6 +1,5 @@
 import About from "./About";
 import Achievement from "./Achievement";
-import { EarthCanvas, StarsCanvas } from "./canvas";
 import Contact from "./Contact";
 import Feedbacks from "./Feedbacks";
 import CanvasLoader from "./Loader";
@@ -14,11 +13,9 @@ export {
   Achievement,
   CanvasLoader,
   Contact,
-  EarthCanvas,
   Feedbacks,
   Navbar,
   Preloader,
   ScrollyHero,
-  StarsCanvas,
   Works,
 };
