@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
-import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 import { testimonials } from "../constants";
 
@@ -54,40 +53,50 @@ const FeedbackCard = ({
   </div>
 );
 
-// ~14s per card keeps the scroll slow enough to read.
-const SECONDS_PER_CARD = 14;
+// ~9s per card: slow enough to read, quick enough to feel alive.
+const SECONDS_PER_CARD = 9;
 
+// Full-bleed section (no boxed parent) so the marquee runs edge to edge of the
+// viewport; only the heading is constrained to the page's content width.
 const Feedbacks = () => {
   return (
-      <div className={`mt-12 bg-[#0a0c14] rounded-[20px]`}>
-        <div
-          className={` bg-[#111522] rounded-2xl ${styles.padding} min-h-[300px]`}
+    <section className="relative z-0 w-full overflow-x-clip">
+      <span className="hash-span" id="testimonials">
+        &nbsp;
+      </span>
+
+      <div className={`max-w-7xl mx-auto ${styles.padding} pb-0`}>
+        <motion.div
+          variants={textVariant()}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.4 }}
         >
-          <motion.div variants={textVariant()}>
-            <p className={`text-[#8ec5ff] ${styles.sectionSubText}`}>
-              What others say
-            </p>
-            <h2 className={styles.sectionHeadText}>Testimonials.</h2>
-          </motion.div>
+          <p className={`text-[#8ec5ff] ${styles.sectionSubText}`}>
+            What others say
+          </p>
+          <h2 className={styles.sectionHeadText}>Testimonials.</h2>
+        </motion.div>
+      </div>
+
+      <div className="testimonial-marquee w-full pt-10 pb-14 min-h-[520px]">
+        <div
+          className="testimonial-track"
+          style={{
+            "--marquee-duration": `${testimonials.length * SECONDS_PER_CARD}s`,
+          }}
+        >
+          {/* Rendered twice so the -50% translate loops seamlessly. */}
+          {[...testimonials, ...testimonials].map((testimonial, index) => (
+            <FeedbackCard
+              key={`${testimonial.name}-${index}`}
+              {...testimonial}
+            />
+          ))}
         </div>
-        <div className="testimonial-marquee -mt-20 pt-6 pb-14 min-h-[520px]">
-          <div
-            className="testimonial-track"
-            style={{
-              "--marquee-duration": `${testimonials.length * SECONDS_PER_CARD}s`,
-            }}
-          >
-            {/* Rendered twice so the -50% translate loops seamlessly. */}
-            {[...testimonials, ...testimonials].map((testimonial, index) => (
-              <FeedbackCard
-                key={`${testimonial.name}-${index}`}
-                {...testimonial}
-              />
-            ))}
-          </div>
-        </div>
-    </div>
+      </div>
+    </section>
   );
 };
 
-export default SectionWrapper(Feedbacks, "testimonials");
+export default Feedbacks;

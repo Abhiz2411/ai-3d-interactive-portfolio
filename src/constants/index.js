@@ -38,6 +38,10 @@ import {
 
 export const navLinks = [
   {
+    id: "testimonials",
+    title: "Testimonials",
+  },
+  {
     id: "about",
     title: "About",
   },

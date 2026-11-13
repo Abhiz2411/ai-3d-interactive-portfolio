@@ -40,12 +40,14 @@ const App = () => {
                 <ScrollyHero />
               </div>
               <StarsCanvas />
+              <Suspense fallback={<SectionFallback />}>
+                <Feedbacks />
+              </Suspense>
               <About />
               <Suspense fallback={<SectionFallback />}>
                 <Works />
                 <Achievement />
                 <SkillKeyboard />
-                <Feedbacks />
                 <div className="relative z-0">
                   <Contact />
                 </div>
