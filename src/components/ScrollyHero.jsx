@@ -34,15 +34,15 @@ const ScrollyHero = () => {
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  // Every 2nd frame on desktop and every 4th on mobile: scroll-scrubbing is
-  // visually identical but halves decoded-bitmap memory and network cost.
+  // Only even-numbered frames ship (the odd ones were dropped to cut the
+  // payload from ~27 MB to ~3.6 MB). Desktop uses every even frame, mobile
+  // every 4th.
   const frameIndices = useMemo(() => {
     const step = isMobile ? 4 : 2;
+    const lastFrame = TOTAL_FRAMES - 2;
     const indices = [];
-    for (let i = 0; i < TOTAL_FRAMES; i += step) indices.push(i);
-    if (indices[indices.length - 1] !== TOTAL_FRAMES - 1) {
-      indices.push(TOTAL_FRAMES - 1);
-    }
+    for (let i = 0; i <= lastFrame; i += step) indices.push(i);
+    if (indices[indices.length - 1] !== lastFrame) indices.push(lastFrame);
     return indices;
   }, [isMobile]);
 
@@ -112,9 +112,18 @@ const ScrollyHero = () => {
     let cancelled = false;
     imagesRef.current = new Array(frameIndices.length).fill(null);
 
-    // Frame 0 first (it's the LCP element); the rest load in small batches
-    // so the network and main thread aren't saturated during first paint.
+    // Frame 0 first (it's the LCP element); the rest stream in small batches,
+    // each one waiting for the browser to be idle so first paint, input and
+    // scrolling are never competing with image decoding.
     const BATCH = 6;
+    const whenIdle = () =>
+      new Promise((resolve) => {
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(() => resolve(), { timeout: 1500 });
+        } else {
+          setTimeout(resolve, 200);
+        }
+      });
     const loadFrame = (i) =>
       new Promise((resolve) => {
         const img = new Image();
@@ -138,6 +147,7 @@ const ScrollyHero = () => {
           batch.push(loadFrame(j));
         }
         await Promise.all(batch);
+        await whenIdle();
       }
     })();
 

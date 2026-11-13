@@ -356,6 +356,7 @@ const ProjectModal = ({
                   </span>
                 </div>
                 {/* Views - Apple SF Symbol Style (Eye) */}
+                {project.metrics?.views != null && (
                 <div className="flex items-center gap-3">
                   <svg
                     className="w-6 h-6 text-violet-400"
@@ -373,6 +374,7 @@ const ProjectModal = ({
                     {project.metrics?.views ?? 0}
                   </span>
                 </div>
+                )}
               </motion.div>
 
               {/* Description */}

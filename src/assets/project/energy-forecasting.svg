@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Energy &amp; Solar Forecasting">
+  <defs>
+    <linearGradient id="bg-e" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b132b"/>
+      <stop offset="1" stop-color="#1c2541"/>
+    </linearGradient>
+    <radialGradient id="glow-e" cx="0.75" cy="0.35" r="0.6">
+      <stop offset="0" stop-color="#4cc9f0" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#4cc9f0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg-e)"/>
+  <rect width="1280" height="720" fill="url(#glow-e)"/>
+  <g opacity="0.07" stroke="#fff"><line x1="0" y1="0" x2="0" y2="720"/><line x1="100" y1="0" x2="100" y2="720"/><line x1="200" y1="0" x2="200" y2="720"/><line x1="300" y1="0" x2="300" y2="720"/><line x1="400" y1="0" x2="400" y2="720"/><line x1="500" y1="0" x2="500" y2="720"/><line x1="600" y1="0" x2="600" y2="720"/><line x1="700" y1="0" x2="700" y2="720"/><line x1="800" y1="0" x2="800" y2="720"/><line x1="900" y1="0" x2="900" y2="720"/><line x1="1000" y1="0" x2="1000" y2="720"/><line x1="1100" y1="0" x2="1100" y2="720"/><line x1="1200" y1="0" x2="1200" y2="720"/><line x1="0" y1="0" x2="1280" y2="0"/><line x1="0" y1="100" x2="1280" y2="100"/><line x1="0" y1="200" x2="1280" y2="200"/><line x1="0" y1="300" x2="1280" y2="300"/><line x1="0" y1="400" x2="1280" y2="400"/><line x1="0" y1="500" x2="1280" y2="500"/><line x1="0" y1="600" x2="1280" y2="600"/><line x1="0" y1="700" x2="1280" y2="700"/></g>
+  <g>
+  <circle cx="1010" cy="170" r="70" fill="#ffd166"/>
+  <g stroke="#ffd166" stroke-width="8" stroke-linecap="round"><line x1="1105" y1="170" x2="1135" y2="170"/><line x1="1092.2724133595216" y1="217.5" x2="1118.2531754730549" y2="232.5"/><line x1="1057.5" y1="252.27241335952166" x2="1072.5" y2="278.25317547305485"/><line x1="1010" y1="265" x2="1010" y2="295"/><line x1="962.5" y1="252.2724133595217" x2="947.5" y2="278.25317547305485"/><line x1="927.7275866404783" y1="217.5" x2="901.7468245269451" y2="232.5"/><line x1="915" y1="170" x2="885" y2="170.00000000000003"/><line x1="927.7275866404783" y1="122.50000000000003" x2="901.7468245269451" y2="107.50000000000003"/><line x1="962.5" y1="87.72758664047835" x2="947.5" y2="61.74682452694519"/><line x1="1010" y1="75" x2="1010" y2="45"/><line x1="1057.5" y1="87.72758664047834" x2="1072.5" y2="61.746824526945176"/><line x1="1092.2724133595216" y1="122.49999999999996" x2="1118.2531754730549" y2="107.49999999999994"/></g>
+  <path d="M80 430 C 200 330, 300 520, 420 400 S 640 300, 760 420 S 980 520, 1200 380" fill="none" stroke="#4cc9f0" stroke-width="10" stroke-linecap="round"/>
+  <path d="M80 480 C 300 480, 360 250, 640 250 S 980 480, 1200 480" fill="none" stroke="#ffd166" stroke-width="10" stroke-linecap="round" stroke-dasharray="4 22"/>
+  <path d="M80 430 C 200 330, 300 520, 420 400 S 640 300, 760 420 S 980 520, 1200 380 L1200 500 L80 500 Z" fill="#4cc9f0" opacity="0.12"/></g>
+  <text x="80" y="590" font-family="Poppins, 'Segoe UI', Arial, sans-serif" font-size="68" font-weight="800" fill="#fff">Energy &amp; Solar Forecasting</text>
+  <text x="82" y="640" font-family="Poppins, 'Segoe UI', Arial, sans-serif" font-size="28" fill="#4cc9f0">Time series analysis · ARIMA · SARIMA · Prophet</text>
+</svg>
