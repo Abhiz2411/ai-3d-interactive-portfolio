@@ -23,7 +23,7 @@ const ProjectCard = ({ index, name, image, source_code_link, onOpenModal }) => {
 
   return (
     <motion.div
-      variants={fadeIn("up", "spring", index * 0.5, 0.75)}
+      variants={fadeIn("up", "spring", (index % 2) * 0.15, 0.75)}
       className="w-full lg:w-[calc(50%-20px)]"
     >
       <motion.div
