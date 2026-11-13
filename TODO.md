@@ -44,8 +44,9 @@
 
 ## Done / in progress
 
-- Done on branch todo-batch-1: items 1, 2 (15 of 16 recs have photos; Durvesh has none on LinkedIn), 3, 4, 7, 10; performance pass for 5 (re-measure LCP/CLS on `npm run build && npm run preview` with real throttling).
-- Remaining: 6 (mobile/portrait hero), 8 (projects), 9 (achievements), then future chatbot/voice agent.
+- Done on branch todo-batch-1: 1, 2 (15 of 16 recs have photos; Durvesh has none on LinkedIn), 3, 4, 7, 8 (projects), 9 (achievements), 10; testimonials link to LinkedIn; frames/images compressed; hero frames load when idle; unused 3D hero + desktop_pc removed.
+- Remaining: 6 (mobile/portrait hero: needs a 9:16 video), re-check Lighthouse after each big change, then future chatbot/voice agent.
+- Note: the info file listed the FinanceMe repo for both FinanceMe and Smart Parking; the smart-parking-assistant repo was used for Smart Parking.
 
 ## Observability / analytics (add to the future list)
 
@@ -53,10 +54,8 @@
 - **Langfuse** for observability of the AI chatbot / voice agent (traces, prompts, latency, cost).
 - **Sentry** for frontend error monitoring (React error boundary, source maps).
 
-## Performance ideas (from the 2026-11-13 review)
+## Performance ideas
 
-- Defer remaining hero frames until idle and compress them (~13 MB loaded on desktop).
-- Convert project screenshots (PNG, ~1.5 MB each) to WebP/AVIF at proper sizes.
-- Remove unused `public/desktop_pc` (16 MB) and the old `Hero.jsx` / `Computers.jsx`.
-- Split the ~2 MB Spline runtime chunk so it only loads with the skills keyboard (already lazy).
-- Re-measure with Lighthouse on `npm run preview` with mobile + Slow 4G throttling.
+- Done (2026-11-14): hero frames compressed + idle-loaded, project/nav images to WebP/SVG, unused 3D hero + desktop_pc removed.
+- Open: further trim the ~2 MB Spline runtime if Lighthouse still flags unused JS; consider AVIF; portrait hero frames for mobile.
+- Re-measure with Lighthouse (mobile + Slow 4G) after each big change.
