@@ -44,6 +44,5 @@
 
 ## Done / in progress
 
-- Testimonials: replaced placeholders with 6 real LinkedIn recommendations (uncommitted).
-- Done on branch todo-batch-1: items 1, 2 (13 of 16 recs have photos; Durvesh has none on LinkedIn), 3, 4, 7, 10; performance pass for 5 (re-measure LCP/CLS on `npm run build && npm run preview` with real throttling).
+- Done on branch todo-batch-1: items 1, 2 (15 of 16 recs have photos; Durvesh has none on LinkedIn), 3, 4, 7, 10; performance pass for 5 (re-measure LCP/CLS on `npm run build && npm run preview` with real throttling).
 - Remaining: 6 (mobile/portrait hero), 8 (projects), 9 (achievements), then future chatbot/voice agent.
