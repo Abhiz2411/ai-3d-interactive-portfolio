@@ -29,7 +29,9 @@ const Stars = (props) => {
 
 const StarsCanvas = () => {
   return (
-    <div className='w-full h-full absolute inset-0 z-[-1]'>
+    // Fixed to the viewport: an absolute full-page-height canvas was ~9000px
+    // tall and redrawn every frame.
+    <div className='w-full h-screen fixed inset-0 z-[-1] pointer-events-none'>
       <Canvas
         camera={{ position: [0, 0, 1] }}
         dpr={1}

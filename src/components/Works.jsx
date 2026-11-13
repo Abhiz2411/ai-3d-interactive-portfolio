@@ -79,6 +79,8 @@ const ProjectCard = ({ index, name, image, source_code_link, onOpenModal }) => {
           <motion.img
             src={image}
             alt={name}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-[1.02]"
             style={{
               filter: "brightness(0.88) saturate(1.05) contrast(1.02)",
