@@ -95,27 +95,44 @@ const achievements = [
 const testimonials = [
   {
     testimonial:
-      "I thought it was impossible to make a website as beautiful as our product, but Abhijit proved me wrong.",
-    name: "John Doe 1",
-    designation: "CFO",
-    company: "Nimbus Labs",
-    image: "https://randomuser.me/api/portraits/women/4.jpg",
+      "Abhijit is one of the brightest minds I have ever come across. His communication skills and quick grasp over new technologies is something which makes him unique from the crowd. He is a person who can relied upon for the end-to-end development and execution of projects due to his ownership attitude and high learning energy.",
+    name: "Jayraj Choudhury",
+    designation: "Data Scientist",
+    company: "Motilal Oswal",
   },
   {
     testimonial:
-      "I've never met a web developer who truly cares about their clients' success like Abhijit does.",
-    name: "John Doe 2",
-    designation: "COO",
-    company: "Bright Orbit Inc",
-    image: "https://randomuser.me/api/portraits/men/5.jpg",
+      "Abhijit is someone who takes ownership seriously, follows through on delivery, and communicates clearly along the way. He stays curious about new developments in the field, tests them out, and isn't afraid to go deep to understand how things really work. He backs this up with solid research and a habit of documenting and sharing his learnings for honest feedback. Overall, he's a dependable, growth oriented person to work with.",
+    name: "Kunal Modi",
+    designation: "Owner",
+    company: "SkrypTech & Pure Billion Technologies",
   },
   {
     testimonial:
-      "Abhijit boosted our website traffic by 50% through his smart optimization. We are Truly grateful!",
-    name: "John Doe 3",
-    designation: "CTO",
-    company: "Vertex Studio",
-    image: "https://randomuser.me/api/portraits/women/6.jpg",
+      "I had the opportunity to work with Abhijit on an international project and have also seen him work and learn on numerous occasions. He has exceptional networking skills, strong expertise in DevOps and AIOps, and a remarkable ability to leverage AI tools to maximize productivity. If I were starting a startup tomorrow, Abhijit would be the first person I'd call to join the team.",
+    name: "Ashutosh Patil",
+    designation: "ADS",
+    company: "GEP",
+  },
+  {
+    testimonial:
+      "Abhijit exudes a strong sense of curiosity, ownership and execution of AI projects. In my multiple interactions with Abhijit during the GenAI course that I taught at Jio Institute, I noticed that Abhijit dives deep into AI topics and is able to implement advanced AI workflows with thorough research.",
+    name: "Anant Agarwal",
+    designation: "Principal Applied Scientist",
+    company: "TrueFoundry",
+  },
+  {
+    testimonial:
+      "Abhijit has a habit of going deep into problems rather than settling for a surface-level fix. He takes the time to understand how things actually work, and that's backed by the solid research he puts in before starting any task. It shows in the quality of the solutions he comes up with, they're well thought out and rarely need rework.",
+    name: "Mayur Adlak",
+    designation: "Senior Backend Engineer",
+  },
+  {
+    testimonial:
+      "Abhijit has a strong sense of ownership. He doesn't stop once his part is done, he makes sure the final product actually gets delivered. He communicates clearly with both team and clients along the way, which makes him easy to rely on.",
+    name: "Ashutosh Singh",
+    designation: "PGP in AI & DS",
+    company: "Jio Institute",
   },
 ];
 

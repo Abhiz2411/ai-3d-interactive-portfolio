@@ -29,15 +29,25 @@ const FeedbackCard = ({
             <span className="blue-text-gradient">@</span> {name}
           </p>
           <p className="mt-1 text-secondary text-[12px]">
-            {designation} of {company}
+            {designation}
+            {company ? `, ${company}` : ""}
           </p>
         </div>
 
-        <img
-          src={image}
-          alt={`feedback_by-${name}`}
-          className="w-10 h-10 rounded-full object-cover"
-        />
+        {image ? (
+          <img
+            src={image}
+            alt={`feedback_by-${name}`}
+            className="w-10 h-10 rounded-full object-cover"
+          />
+        ) : (
+          <div
+            aria-hidden="true"
+            className="w-10 h-10 shrink-0 rounded-full bg-[#111522] text-[#8ec5ff] flex items-center justify-center font-medium text-[14px]"
+          >
+            {name.charAt(0)}
+          </div>
+        )}
       </div>
     </div>
   </motion.div>
