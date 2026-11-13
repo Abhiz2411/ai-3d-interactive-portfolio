@@ -312,7 +312,7 @@ const SkillKeyboard = () => {
           (hint: press a key)
         </p>
         {/* Suspense fallback while loading the Spline 3D scene */}
-        <LazyMount style={{ minHeight: "60vh" }}>
+        <LazyMount style={{ width: "100%", height: "100%", minHeight: "60vh" }}>
           <Suspense fallback={<div>Loading 3D Keyboard...</div>}>
             <Spline
               ref={splineContainer}
