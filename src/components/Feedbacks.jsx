@@ -58,7 +58,7 @@ const FeedbackCard = ({
 );
 
 // ~9s per card: slow enough to read, quick enough to feel alive.
-const SECONDS_PER_CARD = 9;
+const SECONDS_PER_CARD = 6;
 
 // Full-bleed section (no boxed parent) so the marquee runs edge to edge of the
 // viewport; only the heading is constrained to the page's content width.
