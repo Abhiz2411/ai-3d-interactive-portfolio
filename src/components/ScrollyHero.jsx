@@ -34,18 +34,16 @@ const ScrollyHero = () => {
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  // Desktop loads every frame; mobile loads every 3rd frame to cap data/memory use.
+  // Every 2nd frame on desktop and every 4th on mobile: scroll-scrubbing is
+  // visually identical but halves decoded-bitmap memory and network cost.
   const frameIndices = useMemo(() => {
-    if (isMobile) {
-      const step = 3;
-      const indices = [];
-      for (let i = 0; i < TOTAL_FRAMES; i += step) indices.push(i);
-      if (indices[indices.length - 1] !== TOTAL_FRAMES - 1) {
-        indices.push(TOTAL_FRAMES - 1);
-      }
-      return indices;
+    const step = isMobile ? 4 : 2;
+    const indices = [];
+    for (let i = 0; i < TOTAL_FRAMES; i += step) indices.push(i);
+    if (indices[indices.length - 1] !== TOTAL_FRAMES - 1) {
+      indices.push(TOTAL_FRAMES - 1);
     }
-    return Array.from({ length: TOTAL_FRAMES }, (_, i) => i);
+    return indices;
   }, [isMobile]);
 
   const { scrollYProgress } = useScroll({
@@ -114,15 +112,34 @@ const ScrollyHero = () => {
     let cancelled = false;
     imagesRef.current = new Array(frameIndices.length).fill(null);
 
-    frameIndices.forEach((frameNumber, i) => {
-      const img = new Image();
-      img.src = FRAME_PATH(frameNumber);
-      img.onload = () => {
-        if (cancelled) return;
-        imagesRef.current[i] = img;
-        if (i === 0) draw(img);
-      };
-    });
+    // Frame 0 first (it's the LCP element); the rest load in small batches
+    // so the network and main thread aren't saturated during first paint.
+    const BATCH = 6;
+    const loadFrame = (i) =>
+      new Promise((resolve) => {
+        const img = new Image();
+        img.decoding = "async";
+        img.src = FRAME_PATH(frameIndices[i]);
+        img.onload = () => {
+          if (!cancelled) {
+            imagesRef.current[i] = img;
+            if (i === 0) draw(img);
+          }
+          resolve();
+        };
+        img.onerror = resolve;
+      });
+
+    (async () => {
+      await loadFrame(0);
+      for (let i = 1; i < frameIndices.length && !cancelled; i += BATCH) {
+        const batch = [];
+        for (let j = i; j < Math.min(i + BATCH, frameIndices.length); j++) {
+          batch.push(loadFrame(j));
+        }
+        await Promise.all(batch);
+      }
+    })();
 
     return () => {
       cancelled = true;
@@ -146,7 +163,11 @@ const ScrollyHero = () => {
       if (rafId !== null) return;
       rafId = requestAnimationFrame(() => {
         rafId = null;
-        const image = imagesRef.current[currentFrameRef.current];
+        // Frames still streaming in may be missing; fall back to the nearest
+        // earlier loaded one instead of leaving the canvas stale.
+        let idx = currentFrameRef.current;
+        while (idx > 0 && !imagesRef.current[idx]) idx--;
+        const image = imagesRef.current[idx];
         if (image) draw(image);
       });
     });

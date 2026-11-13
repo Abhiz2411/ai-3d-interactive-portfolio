@@ -8,6 +8,7 @@ import React, { Suspense, useEffect, useRef, useState } from "react";
 import { SKILLS, SkillNames } from "../constants/skills";
 import { sleep } from "../utils/sleep";
 import useMediaQuery from "../utils/useMediaQuery";
+import LazyMount from "./ui/LazyMount";
 import soundEffects from "../utils/soundEffects";
 
 // Lazy-load the Spline React component for 3D rendering
@@ -311,13 +312,15 @@ const SkillKeyboard = () => {
           (hint: press a key)
         </p>
         {/* Suspense fallback while loading the Spline 3D scene */}
-        <Suspense fallback={<div>Loading 3D Keyboard...</div>}>
-          <Spline
-            ref={splineContainer}
-            onLoad={(app) => setSplineApp(app)}
-            scene="/assets/skills-keyboard.spline"
-          />
-        </Suspense>
+        <LazyMount style={{ minHeight: "60vh" }}>
+          <Suspense fallback={<div>Loading 3D Keyboard...</div>}>
+            <Spline
+              ref={splineContainer}
+              onLoad={(app) => setSplineApp(app)}
+              scene="/assets/skills-keyboard.spline"
+            />
+          </Suspense>
+        </LazyMount>
       </div>
       <span id="projects"></span>
     </section>
