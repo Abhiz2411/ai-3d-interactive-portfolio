@@ -11,10 +11,14 @@ const FeedbackCard = ({
   designation,
   company,
   image,
+  linkedin,
 }) => (
-  <div
-    tabIndex={0}
-    className="testimonial-card bg-[#0f0f0f] p-8 rounded-3xl w-[300px] xs:w-[340px] shrink-0 cursor-default outline-none"
+  <a
+    href={linkedin}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`${name} on LinkedIn`}
+    className="testimonial-card block bg-[#0f0f0f] p-8 rounded-3xl w-[300px] xs:w-[340px] shrink-0 cursor-pointer outline-none no-underline"
   >
     <p className="text-white font-black text-[40px] leading-none">"</p>
 
@@ -50,7 +54,7 @@ const FeedbackCard = ({
         )}
       </div>
     </div>
-  </div>
+  </a>
 );
 
 // ~9s per card: slow enough to read, quick enough to feel alive.

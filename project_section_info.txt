@@ -1,0 +1,11 @@
+1. ML benchmarking app - https://ml-benchmark-app.streamlit.app/ 
+    Github - git@github.com:Abhiz2411/ml-benchmark-app.git
+2. Portfolio website - [check what is portfolio website github repo and add it here] - https://ai-3d-portfolio.netlify.app/
+3. Energy demand solar forecasting - git@github.com:Abhiz2411/energy-demand-solar-forecasting.git
+4. Demantia care assistant - git@github.com:Abhiz2411/dementia-care-assistant.git
+5. Ask my pdf - git@github.com:Abhiz2411/ask-my-pdf-v02.git
+6. Pathfinder visualizer - git@github.com:Abhiz2411/pathfinder-visualizer.git
+7. Cinematch - git@github.com:Abhiz2411/cinematch.git
+8. FinanceMe - git@github.com:Abhiz2411/FinanceMe-Devops-Project-01.git
+9. Smart parking assistant - git@github.com:Abhiz2411/FinanceMe-Devops-Project-01.git
+10. LSB stegnography - git@github.com:Abhiz2411/LSB-Steganography-Python-GUI.git
