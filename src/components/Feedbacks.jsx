@@ -3,25 +3,26 @@ import { motion } from "framer-motion";
 
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
-import { fadeIn, textVariant } from "../utils/motion";
+import { textVariant } from "../utils/motion";
 import { testimonials } from "../constants";
 
 const FeedbackCard = ({
-  index,
   testimonial,
   name,
   designation,
   company,
   image,
 }) => (
-  <motion.div
-    variants={fadeIn("", "spring", index * 0.5, 0.75)}
-    className="bg-[#0f0f0f] p-10 rounded-3xl xs:w-[320px] w-full"
+  <div
+    tabIndex={0}
+    className="testimonial-card bg-[#0f0f0f] p-8 rounded-3xl w-[300px] xs:w-[340px] shrink-0 cursor-default outline-none"
   >
-    <p className="text-white font-black text-[48px]">"</p>
+    <p className="text-white font-black text-[40px] leading-none">"</p>
 
     <div className="mt-1">
-      <p className="text-white tracking-wider text-[18px]">{testimonial}</p>
+      <p className="testimonial-text text-white tracking-wide text-[15px] leading-relaxed">
+        {testimonial}
+      </p>
 
       <div className="mt-7 flex justify-between items-center gap-1">
         <div className="flex-1 flex flex-col">
@@ -50,8 +51,11 @@ const FeedbackCard = ({
         )}
       </div>
     </div>
-  </motion.div>
+  </div>
 );
+
+// ~14s per card keeps the scroll slow enough to read.
+const SECONDS_PER_CARD = 14;
 
 const Feedbacks = () => {
   return (
@@ -66,14 +70,21 @@ const Feedbacks = () => {
             <h2 className={styles.sectionHeadText}>Testimonials.</h2>
           </motion.div>
         </div>
-        <div className={`-mt-20 pb-14 ${styles.paddingX} flex flex-wrap gap-7`}>
-          {testimonials.map((testimonial, index) => (
-            <FeedbackCard
-              key={testimonial.name}
-              index={index}
-              {...testimonial}
-            />
-          ))}
+        <div className="testimonial-marquee -mt-20 pb-14 min-h-[480px]">
+          <div
+            className="testimonial-track"
+            style={{
+              "--marquee-duration": `${testimonials.length * SECONDS_PER_CARD}s`,
+            }}
+          >
+            {/* Rendered twice so the -50% translate loops seamlessly. */}
+            {[...testimonials, ...testimonials].map((testimonial, index) => (
+              <FeedbackCard
+                key={`${testimonial.name}-${index}`}
+                {...testimonial}
+              />
+            ))}
+          </div>
         </div>
     </div>
   );

@@ -328,3 +328,77 @@
       -1.8em -1.8em 0 0em #ffffff;
   }
 }
+
+/* Testimonials marquee: slow infinite horizontal scroll, paused on hover so
+   the hovered card can expand and be read. */
+.testimonial-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 4%,
+    #000 96%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 4%,
+    #000 96%,
+    transparent
+  );
+}
+
+.testimonial-track {
+  display: flex;
+  width: max-content;
+  gap: 28px;
+  align-items: flex-start;
+  animation: testimonialScroll var(--marquee-duration, 240s) linear infinite;
+  will-change: transform;
+}
+
+.testimonial-marquee:hover .testimonial-track,
+.testimonial-marquee:focus-within .testimonial-track {
+  animation-play-state: paused;
+}
+
+@keyframes testimonialScroll {
+  to {
+    transform: translateX(calc(-50% - 14px));
+  }
+}
+
+.testimonial-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.testimonial-card .testimonial-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  overflow: hidden;
+}
+
+.testimonial-card:hover,
+.testimonial-card:focus-visible {
+  transform: scale(1.06);
+  position: relative;
+  z-index: 20;
+  box-shadow: 0 20px 60px -10px rgba(145, 94, 255, 0.45);
+}
+
+.testimonial-card:hover .testimonial-text,
+.testimonial-card:focus-visible .testimonial-text {
+  -webkit-line-clamp: unset;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee {
+    overflow-x: auto;
+  }
+  .testimonial-track {
+    animation: none;
+  }
+}
