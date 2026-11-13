@@ -1,4 +1,12 @@
 import {
+  github,
+  iconCampus,
+  iconGlobe,
+  iconGraduation,
+  iconHackathon,
+  iconLinkedIn,
+  iconMedal,
+  iconSpeaker,
   code,
   concepts,
   coursera,
@@ -45,12 +53,60 @@ export const navLinks = [
 
 const achievements = [
   {
+    title: ["Kanaka Hackathon Winner"],
+    company_name: "Kanaka Software",
+    icon: iconHackathon,
+    iconBg: "#1d2a4a",
+    date: "Nov 2023",
+    points: [
+      "Team Medi-कवच won 1st prize (₹1 lakh) at the 3rd edition of the Kanaka Software hackathon.",
+    ],
+    link: "https://www.linkedin.com/feed/update/urn:li:activity:7130067327064154112/",
+  },
+  {
     title: ["FreeCodeCamp"],
     company_name: "freeCodeCamp",
     icon: fcc,
     iconBg: "#383E56",
     date: "May 2024",
     points: ["Responsive Web Design", "JavaScript"],
+  },
+  {
+    title: ["Best Outgoing Student", "(CSE, 2023 batch)"],
+    company_name: "TKIET, Warananagar",
+    icon: iconGraduation,
+    iconBg: "#2a2150",
+    date: "Jun 2024",
+    points: [
+      "Nominated Best Outgoing Student from the Computer Science and Engineering branch at Tatyasaheb Kore Institute of Engineering & Technology (about 250 CSE and 750 students across branches).",
+      "Graduated with an 8.9 CGPA, cracked campus placements with two companies and placed 3rd in the college project presentation.",
+    ],
+    link: "https://www.linkedin.com/feed/update/urn:li:activity:7211815398814470144/",
+  },
+  {
+    title: ["National AI Competition", "Winning Team Mentor"],
+    company_name: "Tech4Change x Intel x Lodha Oakwood School",
+    icon: iconMedal,
+    iconBg: "#3b2a12",
+    date: "Aug 2024",
+    points: [
+      "Mentored the Future of Technology Innovators team to win the junior category of a national AI competition on Sustainable Development Goal 12: Sustainable Smart Cities.",
+      "The team built four projects, including an AI Smart Parking Assistant using Arduino UNO, IR sensors and a Python GUI.",
+      "Won a ₹75,000 cash prize, scholarships and a 4-week internship opportunity at Ashoka University.",
+    ],
+    link: "https://www.linkedin.com/feed/update/urn:li:activity:7226693377616973824/",
+  },
+  {
+    title: ["Top 0.07% on LinkedIn"],
+    company_name: "LinkedIn",
+    icon: iconLinkedIn,
+    iconBg: "#0a66c2",
+    date: "Dec 2024",
+    points: [
+      "Named among LinkedIn's top 0.07% of users globally in the 2024 LinkedIn Unwrapped.",
+      "28 posts, 1,648 total reactions and 56 comments in 2024.",
+    ],
+    link: "https://lnkd.in/p/dWqgm7ja",
   },
   {
     title: ["HackerRank"],
@@ -80,6 +136,55 @@ const achievements = [
     iconBg: "#0056d2",
     date: "Jul 2025",
     points: ["IBM Full Stack Software Developer"],
+  },
+  {
+    title: ["International Immersion Programme", "Nanyang Technological University"],
+    company_name: "NTU Singapore",
+    icon: iconGlobe,
+    iconBg: "#14313f",
+    date: "Aug 2025",
+    points: [
+      "Completed a 14-day International Immersion Programme at NTU Singapore (ranked #12 in QS 2026) through Jio Institute.",
+      "Studied ML for Business and Strategy for AI: governance, business models and adoption challenges.",
+    ],
+    link: "https://www.linkedin.com/feed/update/urn:li:activity:7378269798767624192/",
+  },
+  {
+    title: ["Guest Speaker", "Somaiya Vidyavihar University"],
+    company_name: "Somaiya Vidyavihar University",
+    icon: iconSpeaker,
+    iconBg: "#3a1a2e",
+    date: "May 2026",
+    points: [
+      "Invited to deliver an expert session on Applications of AI/ML Techniques for Malware Analysis to the Information Technology department.",
+      "Received an appreciation letter from the department.",
+    ],
+    link: "https://www.linkedin.com/feed/update/urn:li:activity:7456908095689121792/",
+  },
+  {
+    title: ["Guest of Honour", "Future Ready Engineers Program"],
+    company_name: "TKIET, Warananagar",
+    icon: iconCampus,
+    iconBg: "#1f3a2a",
+    date: "Oct 2026",
+    points: [
+      "Returned to my alma mater, Tatyasaheb Kore Institute of Engineering & Technology, as Guest of Honour for the Future Ready Engineers Program 2026-27.",
+      "Spent 7 hours with students of the Department of CSE talking about the AI engineering work I do every day.",
+    ],
+    link: "https://www.linkedin.com/feed/update/urn:li:activity:7519327357556387840/",
+  },
+  {
+    title: ["GitHub", "322-star open-source portfolio"],
+    company_name: "GitHub",
+    icon: github,
+    iconBg: "#E6DEDD",
+    date: "Open source",
+    points: [
+      "My 3D interactive portfolio repository has earned 322 stars and 67 forks.",
+      "GitHub achievements: Starstruck, Pull Shark, Pair Extraordinaire and Quickdraw.",
+    ],
+    link: "https://github.com/Abhiz2411/3D-interactive-portfolio",
+    linkLabel: "View on GitHub",
   },
 ];
 

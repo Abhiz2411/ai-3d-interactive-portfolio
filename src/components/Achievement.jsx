@@ -68,6 +68,17 @@ const AchievementCard = ({ Achievement }) => {
           </li>
         ))}
       </ul>
+
+      {Achievement.link && (
+        <a
+          href={Achievement.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-5 text-[14px] text-blue-400 underline hover:text-blue-300 transition-colors duration-200"
+        >
+          {Achievement.linkLabel || "View on LinkedIn"}
+        </a>
+      )}
     </VerticalTimelineElement>
   );
 };

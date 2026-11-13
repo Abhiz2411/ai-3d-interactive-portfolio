@@ -7,6 +7,13 @@ import coursera from "./achievement/Coursera.png";
 import hr from "./achievement/HR.jpg";
 import cp from "./achievement/Certiport.jpg";
 import fcc from "./achievement/free_code_camp.jpg";
+import iconHackathon from "./achievement/hackathon.svg";
+import iconGraduation from "./achievement/graduation.svg";
+import iconMedal from "./achievement/medal.svg";
+import iconLinkedIn from "./achievement/linkedin.svg";
+import iconGlobe from "./achievement/globe.svg";
+import iconSpeaker from "./achievement/speaker.svg";
+import iconCampus from "./achievement/campus.svg";
 
 import mlBenchmark from "./project/ml-benchmark.webp";
 import portfolioSite from "./project/portfolio-site.webp";
@@ -60,6 +67,13 @@ export {
   hr,
   cp,
   fcc,
+  iconHackathon,
+  iconGraduation,
+  iconMedal,
+  iconLinkedIn,
+  iconGlobe,
+  iconSpeaker,
+  iconCampus,
   ideas,
   concepts,
   designs,
