@@ -312,7 +312,12 @@ const SkillKeyboard = () => {
           (hint: press a key)
         </p>
         {/* Suspense fallback while loading the Spline 3D scene */}
-        <LazyMount style={{ width: "100%", height: "100%", minHeight: "60vh" }}>
+        <LazyMount
+          style={{ width: "100%", height: "100%", minHeight: "60vh" }}
+          rootMargin={isMobile ? "150px 0px" : "600px 0px"}
+          unmountWhenFar={isMobile}
+          onUnmount={() => setSplineApp(undefined)}
+        >
           <Suspense fallback={<div>Loading 3D Keyboard...</div>}>
             <Spline
               ref={splineContainer}

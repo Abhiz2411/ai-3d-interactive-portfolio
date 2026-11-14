@@ -205,7 +205,11 @@ const Contact = () => {
             variants={slideIn("right", "tween", 0.2, 1)}
             className="xl:flex-1 my-auto h-[300px] sm:h-[350px] md:h-[450px] lg:h-[550px] w-full"
           >
-            <LazyMount className="w-full h-full">
+            <LazyMount
+              className="w-full h-full"
+              rootMargin="150px 0px"
+              unmountWhenFar
+            >
               <EarthCanvas />
             </LazyMount>
           </motion.div>

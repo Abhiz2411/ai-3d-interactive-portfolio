@@ -9,13 +9,17 @@ const LazyMount = ({
   rootMargin = "600px 0px",
   className,
   style,
+  // Free GPU memory: unmount again once scrolled well away (phones crash
+  // when several WebGL contexts stay alive at once).
+  unmountWhenFar = false,
+  onUnmount,
 }) => {
   const ref = useRef(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const node = ref.current;
-    if (!node || mounted) return;
+    if (!node) return;
     if (!("IntersectionObserver" in window)) {
       setMounted(true);
       return;
@@ -24,14 +28,17 @@ const LazyMount = ({
       ([entry]) => {
         if (entry.isIntersecting) {
           setMounted(true);
-          observer.disconnect();
+          if (!unmountWhenFar) observer.disconnect();
+        } else if (unmountWhenFar) {
+          setMounted(false);
+          if (onUnmount) onUnmount();
         }
       },
       { rootMargin }
     );
     observer.observe(node);
     return () => observer.disconnect();
-  }, [mounted, rootMargin]);
+  }, [rootMargin, unmountWhenFar]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div ref={ref} className={className} style={style}>
