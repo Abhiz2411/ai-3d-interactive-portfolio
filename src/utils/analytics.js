@@ -1,7 +1,12 @@
-// Google Analytics 4. Does nothing unless VITE_GA_ID (e.g. G-XXXXXXXXXX) is
-// set at build time, so local/dev builds never send data. The gtag script is
-// injected only after the page is idle to keep it off the critical path.
-const GA_ID = import.meta.env.VITE_GA_ID;
+// Google Analytics 4. The Measurement ID is public (it ships in the page), so a
+// default is built in; VITE_GA_ID overrides it. Nothing is sent from localhost
+// or private-network addresses, so local testing never pollutes the data. The
+// gtag script is injected only after the page is idle.
+const GA_ID = import.meta.env.VITE_GA_ID || "G-Z14K8WJ07F";
+const isLocal = () =>
+  /^(localhost$|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|.*\.local$)/.test(
+    window.location.hostname
+  );
 let enabled = false;
 
 function gtag() {
@@ -9,7 +14,7 @@ function gtag() {
 }
 
 export function initAnalytics() {
-  if (!GA_ID || enabled || typeof window === "undefined") return;
+  if (!GA_ID || enabled || typeof window === "undefined" || isLocal()) return;
   enabled = true;
   window.dataLayer = window.dataLayer || [];
 
