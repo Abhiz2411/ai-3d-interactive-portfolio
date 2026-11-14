@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 import { styles } from "../styles";
 import { textVariant } from "../utils/motion";
+import { trackEvent } from "../utils/analytics";
 import { testimonials } from "../constants";
 
 const FeedbackCard = ({
@@ -18,6 +19,7 @@ const FeedbackCard = ({
     target="_blank"
     rel="noopener noreferrer"
     aria-label={`${name} on LinkedIn`}
+    onClick={() => trackEvent("testimonial_click", { person: name })}
     className="testimonial-card block bg-[#0f0f0f] p-8 rounded-3xl w-[300px] xs:w-[340px] shrink-0 cursor-pointer outline-none no-underline"
   >
     <p className="text-white font-black text-[40px] leading-none">"</p>
@@ -41,7 +43,7 @@ const FeedbackCard = ({
         {image ? (
           <img
             src={image}
-            alt={`feedback_by-${name}`}
+            alt={`Photo of ${name}`}
             className="w-10 h-10 rounded-full object-cover"
           />
         ) : (

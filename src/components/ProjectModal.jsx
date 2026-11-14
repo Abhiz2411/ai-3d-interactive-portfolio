@@ -516,7 +516,7 @@ const ProjectModal = ({
                   }
                   className="flex-1 flex items-center justify-center gap-3 px-6 py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  <img src={github} alt="github" className="w-6 h-6" />
+                  <img src={github} alt="GitHub" className="w-6 h-6" />
                   Source Code
                 </button>
               </motion.div>

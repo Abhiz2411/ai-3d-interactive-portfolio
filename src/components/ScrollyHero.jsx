@@ -190,6 +190,8 @@ const ScrollyHero = () => {
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <canvas
           ref={canvasRef}
+          role="img"
+          aria-label="Portrait of Abhijit Zende, Lead AI Engineer"
           className="absolute inset-0 w-full h-full"
           style={{ backgroundColor: "#050816" }}
         />

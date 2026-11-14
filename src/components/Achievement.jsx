@@ -11,6 +11,7 @@ import { achievements } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
 import { textVariant } from "../utils/motion";
+import { trackEvent } from "../utils/analytics";
 
 const AchievementCard = ({ Achievement }) => {
   return (
@@ -72,6 +73,13 @@ const AchievementCard = ({ Achievement }) => {
       {Achievement.link && (
         <a
           href={Achievement.link}
+          onClick={() =>
+            trackEvent("achievement_link_click", {
+              achievement: Array.isArray(Achievement.title)
+                ? Achievement.title[0]
+                : Achievement.title,
+            })
+          }
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block mt-5 text-[14px] text-blue-400 underline hover:text-blue-300 transition-colors duration-200"

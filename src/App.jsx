@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { About, Navbar, Preloader, ScrollyHero } from "./components";
 import EasterEggs from "./components/EasterEggs";
 import ElasticCursor from "./components/ElasticCursor";
+import NotFound from "./components/NotFound";
 import ReactBitsAudioProvider from "./reactbits/context/ReactBitsAudioProvider";
 import ReactBitsCursorProvider from "./reactbits/context/ReactBitsCursorProvider";
 
@@ -49,6 +50,10 @@ function useIdleReady(delayMs = 1200) {
 
 const App = () => {
   const belowFoldReady = useIdleReady();
+
+  // Single-page site: any path other than the root is a 404.
+  const isHome = ["/", "/index.html"].includes(window.location.pathname);
+  if (!isHome) return <NotFound />;
 
   return (
     <ReactBitsCursorProvider>

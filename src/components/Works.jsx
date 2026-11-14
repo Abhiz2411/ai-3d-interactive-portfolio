@@ -9,6 +9,7 @@ import useCardIntent from "../reactbits/hooks/useCardIntent";
 import useParallax from "../reactbits/hooks/useParallax";
 import { styles } from "../styles";
 import { fadeIn, textVariant } from "../utils/motion";
+import { trackEvent } from "../utils/analytics";
 import useMediaQuery from "../utils/useMediaQuery";
 import ProjectModal from "./ProjectModal";
 
@@ -61,6 +62,7 @@ const ProjectCard = ({ index, name, image, source_code_link, onOpenModal }) => {
             transition={{ type: "spring", stiffness: 450, damping: 22 }}
             onClick={(e) => {
               e.stopPropagation();
+              trackEvent("project_github_click", { project: name });
               window.open(source_code_link, "_blank");
             }}
             className="relative w-10 h-10 rounded-lg bg-white/[0.05] backdrop-blur-lg border border-white/[0.12] hover:border-blue-500/40 hover:bg-white/[0.08] flex items-center justify-center transition-all duration-400"
@@ -68,7 +70,7 @@ const ProjectCard = ({ index, name, image, source_code_link, onOpenModal }) => {
           >
             <img
               src={github}
-              alt="github"
+              alt="GitHub"
               className="w-5 h-5 opacity-75 group-hover:opacity-100 transition-opacity duration-300"
             />
           </motion.button>
@@ -151,6 +153,7 @@ const Works = () => {
 
   const handleOpenModal = (project, previewReady = false) => {
     const index = projects.findIndex((p) => p.name === project.name);
+    trackEvent("project_open", { project: project.name });
     setCurrentProjectIndex(index);
     setSelectedProject(project);
     setModalPreviewReady(previewReady);
@@ -196,7 +199,7 @@ const Works = () => {
                     >
                       <img
                         src={word.imgPath}
-                        alt="person"
+                        alt="" aria-hidden="true"
                         className=" md:p-2 p-1 rounded-full bg-[#8ec5ff]"
                       />
                       <span

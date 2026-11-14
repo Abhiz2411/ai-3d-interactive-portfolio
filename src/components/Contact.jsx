@@ -7,6 +7,7 @@ import useMagnetic from "../reactbits/hooks/useMagnetic";
 import useSoundCue from "../reactbits/hooks/useSoundCue";
 import { styles } from "../styles";
 import { slideIn } from "../utils/motion";
+import { trackEvent } from "../utils/analytics";
 import { EarthCanvas } from "./canvas";
 import LazyMount from "./ui/LazyMount";
 import Toast from "./ui/toast";
@@ -89,6 +90,7 @@ const Contact = () => {
         () => {
           setLoading(false);
           play("success");
+          trackEvent("contact_submit");
           setToast({
             open: true,
             message: "Thank you. I will get back to you as soon as possible.",
