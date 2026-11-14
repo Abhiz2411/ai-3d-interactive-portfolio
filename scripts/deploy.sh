@@ -3,6 +3,9 @@
 # Run from the repo root on the server: ./scripts/deploy.sh
 set -euo pipefail
 
+# Small droplets: let Node use swap-backed memory so the Vite build does not OOM.
+export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=2048}"
+
 WEB_ROOT="${WEB_ROOT:-/var/www/portfolio/html}"
 BRANCH="${BRANCH:-main}"
 
