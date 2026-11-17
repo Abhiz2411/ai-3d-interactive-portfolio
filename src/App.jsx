@@ -50,10 +50,11 @@ function useIdleReady(delayMs = 1200) {
   return ready;
 }
 
-// Before the launch time only the hero + countdown render. `?reveal=1` lets the
-// owner preview the full site early. The gate is client-side (device clock).
+// Before the launch time only the hero + countdown render. The gate is
+// client-side (device clock). `?reveal` previews the full site in dev only.
 const isRevealed = () =>
-  new URLSearchParams(window.location.search).has("reveal") ||
+  (import.meta.env.DEV &&
+    new URLSearchParams(window.location.search).has("reveal")) ||
   (!TEST_SECONDS && Date.now() >= REVEAL_AT);
 
 const App = () => {

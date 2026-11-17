@@ -6,11 +6,11 @@ import { fireConfetti } from "../utils/confetti";
 
 // Launch moment: midnight at the start of 24 Nov 2026, India time.
 export const REVEAL_AT = new Date("2026-11-24T00:00:00+05:30").getTime();
-// Test mode: `?countdown=20` runs a 20 s countdown from when the teaser appears,
-// so the celebration + reveal can be checked without waiting for 24 Nov.
-const testParam = Number(
-  new URLSearchParams(window.location.search).get("countdown")
-);
+// Dev-only test mode: `?countdown=20` (npm run dev / vite dev server) runs a
+// short countdown. Compiled out of production builds so visitors cannot use it.
+const testParam = import.meta.env.DEV
+  ? Number(new URLSearchParams(window.location.search).get("countdown"))
+  : 0;
 export const TEST_SECONDS = testParam > 0 ? Math.min(testParam, 600) : 0;
 
 const BIRTH_YEAR = 2001;
