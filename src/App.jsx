@@ -1,11 +1,12 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { About, Navbar, Preloader, ScrollyHero } from "./components";
 import EasterEggs from "./components/EasterEggs";
 import ElasticCursor from "./components/ElasticCursor";
 import NotFound from "./components/NotFound";
-import Teaser, { REVEAL_AT } from "./components/Teaser";
+import Teaser, { REVEAL_AT, TEST_SECONDS } from "./components/Teaser";
 import ReactBitsAudioProvider from "./reactbits/context/ReactBitsAudioProvider";
 import ReactBitsCursorProvider from "./reactbits/context/ReactBitsCursorProvider";
 
@@ -52,12 +53,13 @@ function useIdleReady(delayMs = 1200) {
 // Before the launch time only the hero + countdown render. `?reveal=1` lets the
 // owner preview the full site early. The gate is client-side (device clock).
 const isRevealed = () =>
-  Date.now() >= REVEAL_AT ||
-  new URLSearchParams(window.location.search).has("reveal");
+  new URLSearchParams(window.location.search).has("reveal") ||
+  (!TEST_SECONDS && Date.now() >= REVEAL_AT);
 
 const App = () => {
   const belowFoldReady = useIdleReady();
   const [revealed, setRevealed] = useState(isRevealed);
+  const revealedOnLoad = useRef(revealed);
 
   // Single-page site: any path other than the root is a 404.
   const isHome = ["/", "/index.html"].includes(window.location.pathname);
@@ -68,7 +70,12 @@ const App = () => {
       <ReactBitsAudioProvider>
         <Preloader>
           <BrowserRouter>
-            <div
+            {/* key remounts on reveal so the full site fades in after the celebration */}
+            <motion.div
+              key={revealed ? "full" : "teaser"}
+              initial={{ opacity: revealedOnLoad.current || !revealed ? 1 : 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.9, ease: "easeOut" }}
               className="relative z-0"
               style={{ backgroundColor: "hsl(222.2 84% 4.9%)" }}
             >
@@ -77,7 +84,12 @@ const App = () => {
               <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
                 {revealed && <Navbar />}
                 <ScrollyHero teaser={!revealed}>
-                  <Teaser onReveal={() => setRevealed(true)} />
+                  <Teaser
+                    onReveal={() => {
+                      window.scrollTo(0, 0);
+                      setRevealed(true);
+                    }}
+                  />
                 </ScrollyHero>
               </div>
               {!revealed ? null : belowFoldReady ? (
@@ -101,7 +113,7 @@ const App = () => {
               ) : (
                 <SectionFallback />
               )}
-            </div>
+            </motion.div>
           </BrowserRouter>
         </Preloader>
       </ReactBitsAudioProvider>

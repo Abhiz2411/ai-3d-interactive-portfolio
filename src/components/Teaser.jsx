@@ -1,10 +1,18 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { styles } from "../styles";
+import { fireConfetti } from "../utils/confetti";
 
 // Launch moment: midnight at the start of 24 Nov 2026, India time.
 export const REVEAL_AT = new Date("2026-11-24T00:00:00+05:30").getTime();
+// Test mode: `?countdown=20` runs a 20 s countdown from when the teaser appears,
+// so the celebration + reveal can be checked without waiting for 24 Nov.
+const testParam = Number(
+  new URLSearchParams(window.location.search).get("countdown")
+);
+export const TEST_SECONDS = testParam > 0 ? Math.min(testParam, 600) : 0;
+
 const BIRTH_YEAR = 2001;
 const AGE_ON_REVEAL = new Date(REVEAL_AT).getFullYear() - BIRTH_YEAR; // 25
 
@@ -15,19 +23,23 @@ const accentTextStyle = {
 const STATS = [
   { value: "30K+", label: "Lifetime views" },
   { value: "320+", label: "GitHub stars" },
-  { value: "Top 3", label: "3D portfolio in India, per ChatGPT" },
+  { value: "Top 10", label: "3D portfolio in India, per ChatGPT" },
 ];
 
 const pad = (n) => String(n).padStart(2, "0");
 
 function useCountdown(target, onDone) {
   const [left, setLeft] = useState(() => Math.max(0, target - Date.now()));
+  const doneRef = useRef(false);
 
   useEffect(() => {
     const tick = () => {
       const remaining = Math.max(0, target - Date.now());
       setLeft(remaining);
-      if (remaining === 0) onDone?.();
+      if (remaining === 0 && !doneRef.current) {
+        doneRef.current = true;
+        onDone?.();
+      }
     };
     tick();
     const id = setInterval(tick, 1000);
@@ -58,8 +70,19 @@ const Unit = ({ value, label, glow }) => (
   </div>
 );
 
+const CELEBRATION_MS = 3200;
+
 const Teaser = ({ onReveal }) => {
-  const { days, hours, minutes, seconds } = useCountdown(REVEAL_AT, onReveal);
+  const [target] = useState(() =>
+    TEST_SECONDS ? Date.now() + TEST_SECONDS * 1000 : REVEAL_AT
+  );
+  const [done, setDone] = useState(false);
+
+  const { days, hours, minutes, seconds } = useCountdown(target, () => {
+    setDone(true);
+    fireConfetti(CELEBRATION_MS + 600);
+    setTimeout(() => onReveal?.(), CELEBRATION_MS);
+  });
 
   return (
     <div className="absolute inset-0 z-10 flex flex-col items-center text-center px-5">
@@ -85,7 +108,44 @@ const Teaser = ({ onReveal }) => {
         </p>
       </motion.div>
 
-      <div className="relative mt-auto w-full flex flex-col items-center pb-7 sm:pb-10">
+      {done && (
+        <>
+          <motion.div
+            aria-hidden
+            initial={{ opacity: 0, scale: 0.4 }}
+            animate={{ opacity: [0, 0.9, 0.35], scale: [0.4, 1.6, 2.2] }}
+            transition={{ duration: 1.6, ease: "easeOut" }}
+            className="pointer-events-none absolute left-1/2 top-[62%] h-[60vmin] w-[60vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(145,94,255,0.65),rgba(145,94,255,0)_65%)]"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 140, damping: 12 }}
+            className="relative mt-auto mb-[14vh] flex flex-col items-center"
+            role="status"
+          >
+            <p className="uppercase tracking-[0.3em] text-[#c9b3ff] text-[10px] sm:text-xs">
+              24 November 2026
+            </p>
+            <h2 className="mt-3 font-black text-white text-[38px] leading-[44px] sm:text-[64px] sm:leading-[72px]">
+              The wait is{" "}
+              <span className="text-[#915EFF]" style={accentTextStyle}>
+                over
+              </span>
+              .
+            </h2>
+            <p className="mt-3 text-white/90 text-base sm:text-xl">
+              Welcome to my portfolio.
+            </p>
+          </motion.div>
+        </>
+      )}
+
+      <div
+        className={`relative mt-auto w-full flex-col items-center pb-7 sm:pb-10 ${
+          done ? "hidden" : "flex"
+        }`}
+      >
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
