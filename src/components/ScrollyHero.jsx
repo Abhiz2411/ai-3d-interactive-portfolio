@@ -19,7 +19,8 @@ const accentTextStyle = {
 const overlayTextClass =
   "text-white max-w-xl font-medium text-xl xs:text-2xl sm:text-2xl md:text-3xl lg:text-4xl leading-snug lg:leading-[46px]";
 
-const ScrollyHero = () => {
+// teaser: single-screen hero (first frame only) with `children` as the overlay.
+const ScrollyHero = ({ teaser = false, children }) => {
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
   const imagesRef = useRef([]);
@@ -129,6 +130,7 @@ const ScrollyHero = () => {
 
     (async () => {
       await loadFrame(0);
+      if (teaser) return;
       for (let i = 1; i < frameIndices.length && !cancelled; i += BATCH) {
         const batch = [];
         for (let j = i; j < Math.min(i + BATCH, frameIndices.length); j++) {
@@ -142,12 +144,13 @@ const ScrollyHero = () => {
     return () => {
       cancelled = true;
     };
-  }, [frameIndices]);
+  }, [frameIndices, teaser]);
 
   useEffect(() => {
     let rafId = null;
 
     const unsubscribe = scrollYProgress.on("change", (progress) => {
+      if (teaser) return;
       const lastIndex = frameIndices.length - 1;
       const targetIndex = Math.min(
         lastIndex,
@@ -174,7 +177,7 @@ const ScrollyHero = () => {
       unsubscribe();
       if (rafId !== null) cancelAnimationFrame(rafId);
     };
-  }, [scrollYProgress, frameIndices]);
+  }, [scrollYProgress, frameIndices, teaser]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -186,7 +189,9 @@ const ScrollyHero = () => {
   }, [isMobile]);
 
   return (
-    <section ref={sectionRef} className="relative w-full h-[400vh]" id="hero">
+    <section ref={sectionRef} className={`relative w-full ${teaser ? "h-screen" : "h-[400vh]"}`}
+      id="hero"
+    >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <canvas
           ref={canvasRef}
@@ -198,6 +203,10 @@ const ScrollyHero = () => {
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/60 pointer-events-none" />
 
+        {teaser ? (
+          children
+        ) : (
+          <>
         <motion.div
           style={{ opacity: line1Opacity, y: line1Y }}
           className="absolute inset-0 z-10 flex flex-col items-center justify-start pt-[21vh] md:pt-[16vh] md:justify-center text-center px-6"
@@ -265,6 +274,8 @@ const ScrollyHero = () => {
             </div>
           </a>
         </motion.div>
+          </>
+        )}
       </div>
     </section>
   );
