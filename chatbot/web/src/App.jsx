@@ -207,7 +207,7 @@ export default function App() {
       <header className="top">
         <div className="top__id">
           <div className="avatar" aria-hidden="true">AZ</div>
-          <h1>Abhijit's assistant</h1>
+          <h1>Abhijit’s assistant</h1>
         </div>
         <div className="top__actions">
           {!empty && (
