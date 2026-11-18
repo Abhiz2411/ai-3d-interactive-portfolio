@@ -41,3 +41,6 @@ chatbot/web/dist
 .agents/
 .claude/skills/
 skills-lock.json
+
+# local dev server logs
+.run/
