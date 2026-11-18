@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChatError, fetchStatus, streamChat } from "./api.js";
 import Markdown from "./Markdown.jsx";
+import { DeskCat, NappingDog } from "./Pets.jsx";
 
 const SITE = "https://abhijitzende.com";
 const STORAGE_KEY = "azchat:v1";
@@ -8,7 +9,7 @@ const MAX_CHARS = 500;
 
 const SUGGESTIONS = [
   "What does Abhijit do at Pure Billion?",
-  "Tell me about his RAG projects",
+  "Tell me about his RAG projects.",
   "What is his tech stack?",
   "What has he built with real-time AI?",
 ];
@@ -46,7 +47,7 @@ function Sources({ message }) {
   });
   if (!list.length || message.streaming) return null;
   return (
-    <div className="sources" aria-label="Sources">
+    <ul className="sources" aria-label="Sources">
       {list.map((s) => {
         const short = s.title
           .split(" > ")
@@ -55,29 +56,33 @@ function Sources({ message }) {
           .replace(/^(GitHub repo|Portfolio project|Achievement): /, "");
         const body = (
           <>
-            <span className="sources__kind">{SOURCE_LABEL[s.source] || s.source}</span>
-            <span className="sources__title">{short}</span>
+            <b>{SOURCE_LABEL[s.source] || s.source}</b>
+            <span>{short}</span>
           </>
         );
-        return s.url ? (
-          <a key={s.n} className="chip" href={s.url} target="_blank" rel="noopener noreferrer" title={s.title}>
-            {body}
-          </a>
-        ) : (
-          <span key={s.n} className="chip" title={s.title}>
-            {body}
-          </span>
+        return (
+          <li key={s.n}>
+            {s.url ? (
+              <a className="chip" href={s.url} target="_blank" rel="noopener noreferrer" title={s.title}>
+                {body}
+              </a>
+            ) : (
+              <span className="chip" title={s.title}>
+                {body}
+              </span>
+            )}
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 }
 
 function Message({ m }) {
-  if (m.role === "user") return <div className="msg msg--user"><div className="bubble">{m.content}</div></div>;
+  if (m.role === "user") return <div className="msg msg--user"><div className="pill">{m.content}</div></div>;
   return (
     <div className="msg msg--bot">
-      <div className="avatar" aria-hidden="true">AZ</div>
+      <div className="avatar avatar--sm" aria-hidden="true">AZ</div>
       <div className="reply">
         {m.content ? (
           <div className="prose">
@@ -100,6 +105,7 @@ export default function App() {
   const [notice, setNotice] = useState("");
   const [remaining, setRemaining] = useState(null);
   const [cooldown, setCooldown] = useState(0);
+  const [nudge, setNudge] = useState(0);
   const abortRef = useRef(null);
   const scrollRef = useRef(null);
   const stickRef = useRef(true);
@@ -142,6 +148,7 @@ export default function App() {
       if (!content || busy || cooldown > 0) return;
       setNotice("");
       setInput("");
+      setNudge((n) => n + 1);
       stickRef.current = true;
 
       const userMsg = { id: nextId(), role: "user", content };
@@ -175,6 +182,7 @@ export default function App() {
       } finally {
         patch(() => ({ streaming: false }));
         setBusy(false);
+        setNudge((n) => n + 1);
         abortRef.current = null;
         inputRef.current?.focus();
       }
@@ -198,33 +206,35 @@ export default function App() {
     <div className="app">
       <header className="top">
         <div className="top__id">
-          <div className="avatar avatar--lg" aria-hidden="true">AZ</div>
-          <div>
-            <h1>Abhijit's AI assistant</h1>
-            <p>Grounded in his resume, LinkedIn and GitHub</p>
-          </div>
+          <div className="avatar" aria-hidden="true">AZ</div>
+          <h1>Abhijit's assistant</h1>
         </div>
         <div className="top__actions">
           {!empty && (
-            <button className="ghost" onClick={clear} type="button">New chat</button>
+            <button className="textlink" onClick={clear} type="button">New chat</button>
           )}
-          <a className="ghost" href={SITE}>abhijitzende.com <span aria-hidden="true">↗</span></a>
+          <a className="textlink" href={SITE}>Portfolio</a>
         </div>
       </header>
 
       <main className="scroll" ref={scrollRef} onScroll={onScroll}>
         <div className="col">
           {empty ? (
-            <section className="hero">
-              <h2>Ask me about <span>Abhijit</span></h2>
-              <p>His projects, experience, skills and writing. I answer only from his real work and cite where it came from.</p>
-              <div className="suggest">
-                {SUGGESTIONS.map((s) => (
-                  <button key={s} type="button" onClick={() => send(s)} disabled={limited}>
-                    {s}
-                  </button>
-                ))}
+            <section className="welcome">
+              <div className="welcome__row">
+                <h2>Ask about Abhijit</h2>
+                <NappingDog />
               </div>
+              <p>Answers come from his resume, GitHub and LinkedIn, with sources.</p>
+              <ul className="asks">
+                {SUGGESTIONS.map((q) => (
+                  <li key={q}>
+                    <button type="button" onClick={() => send(q)} disabled={limited}>
+                      {q}
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </section>
           ) : (
             <div className="thread" aria-live="polite">
@@ -238,6 +248,7 @@ export default function App() {
 
       <footer className="dock">
         <div className="col">
+          <DeskCat working={busy} nudge={nudge} />
           {(notice || limited || cooldown > 0) && (
             <div className="notice" role="status">
               {limited
@@ -283,7 +294,7 @@ export default function App() {
           <div className="meta">
             <span>AI can make mistakes. Confirm key details with Abhijit.</span>
             <span className={nearLimit ? "meta__warn" : ""}>
-              {nearLimit ? `${input.length}/${MAX_CHARS}` : remaining !== null ? `${remaining} left today` : ""}
+              {nearLimit ? `${input.length}/${MAX_CHARS}` : remaining !== null ? `${remaining} ${remaining === 1 ? "message" : "messages"} left today` : ""}
             </span>
           </div>
         </div>
