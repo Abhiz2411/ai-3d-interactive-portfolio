@@ -6,6 +6,7 @@ import { About, Navbar, Preloader, ScrollyHero } from "./components";
 import EasterEggs from "./components/EasterEggs";
 import ElasticCursor from "./components/ElasticCursor";
 import NotFound from "./components/NotFound";
+import { RoamingCat } from "./components/Pets";
 import Teaser, { REVEAL_AT, TEST_SECONDS } from "./components/Teaser";
 import ReactBitsAudioProvider from "./reactbits/context/ReactBitsAudioProvider";
 import ReactBitsCursorProvider from "./reactbits/context/ReactBitsCursorProvider";
@@ -88,6 +89,7 @@ const App = () => {
               <EasterEggs />
               <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
                 {revealed && <Navbar />}
+                {revealed && <RoamingCat />}
                 <ScrollyHero teaser={!revealed}>
                   <Teaser
                     onReveal={() => {
