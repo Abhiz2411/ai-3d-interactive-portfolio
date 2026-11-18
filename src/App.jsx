@@ -51,11 +51,15 @@ function useIdleReady(delayMs = 1200) {
 }
 
 // Before the launch time only the hero + countdown render. The gate is
-// client-side (device clock). `?reveal` previews the full site in dev only.
-const isRevealed = () =>
-  (import.meta.env.DEV &&
-    new URLSearchParams(window.location.search).has("reveal")) ||
-  (!TEST_SECONDS && Date.now() >= REVEAL_AT);
+// client-side (device clock). In `npm run dev` the full site shows by default
+// (add `?teaser` or `?countdown=20` to preview the countdown); production
+// builds always follow the launch time.
+const isRevealed = () => {
+  if (import.meta.env.DEV) {
+    return !new URLSearchParams(window.location.search).has("teaser") && !TEST_SECONDS;
+  }
+  return Date.now() >= REVEAL_AT;
+};
 
 const App = () => {
   const belowFoldReady = useIdleReady();

@@ -30,3 +30,14 @@ dist-ssr
 
 # personal docs (not for public repo)
 docs/
+# chatbot secrets and runtime state
+chatbot/.env
+chatbot/data/state/
+chatbot/node_modules
+chatbot/web/node_modules
+chatbot/web/dist
+
+# third-party agent skills installed locally (not part of the site)
+.agents/
+.claude/skills/
+skills-lock.json

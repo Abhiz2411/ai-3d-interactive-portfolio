@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Abhijit's AI Assistant: unlocking soon</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px;
+      background: radial-gradient(1100px 600px at 50% -10%, rgba(145,94,255,.28), transparent 60%), #050816;
+      color: #fff; font-family: Poppins, system-ui, -apple-system, "Segoe UI", sans-serif; text-align: center;
+    }
+    main { max-width: 520px; }
+    .tag { letter-spacing: .3em; font-size: 11px; text-transform: uppercase; color: #c9b3ff; }
+    h1 { margin: 14px 0 10px; font-size: clamp(30px, 6vw, 46px); line-height: 1.1; }
+    h1 span { color: #915eff; }
+    p { margin: 0; color: rgba(255,255,255,.72); line-height: 1.55; }
+    .t { display: flex; gap: 10px; justify-content: center; margin: 28px 0 22px; }
+    .u { width: 72px; padding: 14px 0 10px; border: 1px solid rgba(255,255,255,.12); border-radius: 16px; background: rgba(255,255,255,.05); }
+    .u b { display: block; font-size: 28px; font-variant-numeric: tabular-nums; }
+    .u i { display: block; margin-top: 6px; font-style: normal; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+    a { color: #c9b3ff; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="tag">Opens 24 November 2026</div>
+    <h1>Abhijit's <span>AI assistant</span> is almost ready</h1>
+    <p>Ask it about my projects, experience and skills. It unlocks together with my new portfolio.</p>
+    <div class="t" id="t" data-at="{{LAUNCH_AT}}" role="timer" aria-label="Time until the assistant opens">
+      <div class="u"><b id="d">--</b><i>Days</i></div>
+      <div class="u"><b id="h">--</b><i>Hours</i></div>
+      <div class="u"><b id="m">--</b><i>Min</i></div>
+      <div class="u"><b id="s">--</b><i>Sec</i></div>
+    </div>
+    <p><a href="https://abhijitzende.com">abhijitzende.com</a></p>
+  </main>
+  <script>
+    (function () {
+      var at = Number(document.getElementById("t").dataset.at);
+      var p = function (n) { return String(n).padStart(2, "0"); };
+      function tick() {
+        var s = Math.max(0, Math.floor((at - Date.now()) / 1000));
+        document.getElementById("d").textContent = Math.floor(s / 86400);
+        document.getElementById("h").textContent = p(Math.floor((s % 86400) / 3600));
+        document.getElementById("m").textContent = p(Math.floor((s % 3600) / 60));
+        document.getElementById("s").textContent = p(s % 60);
+        if (s === 0) location.reload(); // server now serves the live app
+      }
+      tick(); setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>

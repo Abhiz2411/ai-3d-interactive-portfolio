@@ -1,0 +1,19 @@
+{
+  "name": "abhijit-portfolio-chatbot",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "fetch:github": "node scripts/fetch-github.mjs",
+    "extract:portfolio": "node scripts/extract-portfolio.mjs",
+    "build:index": "node scripts/build-index.mjs",
+    "ingest": "npm run fetch:github && npm run extract:portfolio && npm run build:index",
+    "eval": "node scripts/eval.mjs",
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { RiBriefcase4Fill } from "react-icons/ri";
+import { RiBriefcase4Fill, RiRobot2Fill } from "react-icons/ri";
 import { Tilt } from "react-tilt";
 import { SectionWrapper } from "../hoc";
 import useMagnetic from "../reactbits/hooks/useMagnetic";
@@ -36,6 +36,10 @@ const ServiceCard = ({ index, title, icon }) => (
   </Tilt>
 );
 
+// Where the "Chat with my assistant" button goes. Override per environment with
+// VITE_CHAT_URL (for example the local chatbot server while developing).
+const CHAT_URL = import.meta.env.VITE_CHAT_URL || "https://aichat.abhijitzende.com";
+
 const About = () => {
   const { ref: resumeButtonRef, style: magneticStyle } = useMagnetic({
     radius: 100,
@@ -60,23 +64,38 @@ const About = () => {
         breaking down complex problems, applying data-driven solutions, and
         iterating quickly. Let's work together to bring our ideas to life!
       </motion.p>
-      <button
-        ref={resumeButtonRef}
-        style={magneticStyle}
-        className="mt-10 px-6 py-3 text-white bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-md shadow-md hover:bg-gradient-to-r hover:from-cyan-600 hover:to-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
-        onClick={() =>
-          (trackEvent("resume_download"),
-          window.open(
-            "https://drive.google.com/file/d/1EyaKyN5S5zmxDEldzXGWezcB6SuWNMcc/view?usp=sharing",
-            "_blank",
-          ))
-        }
-      >
-        <span className="font-semibold flex gap-1.5 items-center">
-          <RiBriefcase4Fill />
-          Download Resume
-        </span>
-      </button>
+      <div className="mt-10 flex flex-wrap items-center gap-4">
+        <button
+          ref={resumeButtonRef}
+          style={magneticStyle}
+          className="px-6 py-3 text-white bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-md shadow-md hover:bg-gradient-to-r hover:from-cyan-600 hover:to-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+          onClick={() =>
+            (trackEvent("resume_download"),
+            window.open(
+              "https://drive.google.com/file/d/1EyaKyN5S5zmxDEldzXGWezcB6SuWNMcc/view?usp=sharing",
+              "_blank",
+            ))
+          }
+        >
+          <span className="font-semibold flex gap-1.5 items-center">
+            <RiBriefcase4Fill />
+            Download Resume
+          </span>
+        </button>
+
+        <a
+          href={CHAT_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackEvent("chat_open")}
+          className="px-6 py-3 text-white rounded-md border border-[#915EFF]/60 bg-[#915EFF]/15 shadow-md transition-colors duration-200 hover:bg-[#915EFF]/30 focus:outline-none focus:ring-2 focus:ring-[#915EFF] focus:ring-opacity-60"
+        >
+          <span className="font-semibold flex gap-1.5 items-center">
+            <RiRobot2Fill />
+            Chat with my AI assistant
+          </span>
+        </a>
+      </div>
     </>
   );
 };

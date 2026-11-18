@@ -1,0 +1,24 @@
+[Unit]
+Description=Abhijit portfolio AI chatbot (Node)
+After=network.target
+
+[Service]
+Type=simple
+User=deploy
+WorkingDirectory=/home/deploy/chat-src/chatbot
+# Secrets live here (root-owned, mode 600), never in the repo.
+EnvironmentFile=/etc/aichat.env
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node server/server.js
+Restart=on-failure
+RestartSec=3
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/deploy/chat-src/chatbot/data/state
+MemoryMax=300M
+
+[Install]
+WantedBy=multi-user.target
