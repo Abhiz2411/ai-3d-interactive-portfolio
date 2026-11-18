@@ -101,7 +101,7 @@ const Achievement = () => {
         viewport={{ once: true, amount: 0.3 }}
       >
         <p className={`${styles.sectionSubText} text-center`}>
-          Small wins along the way
+          What I have Achieved so far
         </p>
         <h2 className={`${styles.sectionHeadText} text-center`}>
           Achievements.

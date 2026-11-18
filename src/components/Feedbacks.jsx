@@ -79,7 +79,7 @@ const Feedbacks = () => {
           viewport={{ once: true, amount: 0.4 }}
         >
           <p className={`text-[#8ec5ff] ${styles.sectionSubText}`}>
-            Kind words
+            What others say
           </p>
           <h2 className={styles.sectionHeadText}>Testimonials.</h2>
         </motion.div>

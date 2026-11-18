@@ -1,4 +1,3 @@
-import { SleepyDog } from "./Pets";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import React, { useRef, useState } from "react";
@@ -134,11 +133,10 @@ const Contact = () => {
         <div className="xl:mt-12 flex xl:flex-row flex-col-reverse gap-6 lg:gap-10 overflow-hidden text-white px-4 sm:px-6 lg:px-8">
           <motion.div
             variants={slideIn("left", "tween", 0.2, 1)}
-            className="relative flex-[0.75] w-full xl:w-[40rem] bg-[#111522] p-4 sm:p-6 lg:p-8 rounded-2xl"
+            className="flex-[0.75] w-full xl:w-[40rem] bg-[#111522] p-4 sm:p-6 lg:p-8 rounded-2xl"
           >
-            <SleepyDog />
             <p className={`text-[#8ec5ff] ${styles.sectionSubText}`}>
-              Say hello
+              Get in touch
             </p>
             <h3
               className={`${styles.sectionHeadText} text-[28px] sm:text-[32px] lg:text-[36px]`}

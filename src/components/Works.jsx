@@ -180,7 +180,7 @@ const Works = () => {
     <>
       <div>
         <motion.div variants={textVariant()}>
-          <p className={`${styles.sectionSubText} `}>Things I've built</p>
+          <p className={`${styles.sectionSubText} `}>My work</p>
           <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
         </motion.div>
         <div className="hero-text">
